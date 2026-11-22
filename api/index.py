@@ -1,18 +1,16 @@
-import os
-import sys
+from api._util import BaseAPIHandler
 
-# Ensure backend directory is in sys.path
-CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
-ROOT_DIR = os.path.dirname(CURRENT_DIR)
-BACKEND_DIR = os.path.join(ROOT_DIR, 'backend')
-
-if BACKEND_DIR not in sys.path:
-    sys.path.insert(0, BACKEND_DIR)
-if ROOT_DIR not in sys.path:
-    sys.path.insert(0, ROOT_DIR)
-
-from app import LeetCodeHandler
-
-# Vercel Serverless Function handler
-class handler(LeetCodeHandler):
-    pass
+class handler(BaseAPIHandler):
+    def do_GET(self):
+        self.send_json({
+            "status": "online",
+            "service": "GCC Code API",
+            "endpoints": [
+                "/api/problems",
+                "/api/problems/[id]",
+                "/api/stats",
+                "/api/submissions",
+                "/api/run",
+                "/api/submit"
+            ]
+        })

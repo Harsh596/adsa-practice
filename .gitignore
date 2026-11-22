@@ -21,3 +21,4 @@ data/user_submissions.json
 
 # Local temp test runners
 .test_tmp*
+.env*
