@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Mac OS
+.DS_Store
+
+# Vercel
+.vercel
+
+# Node / npm
+node_modules/
+npm-debug.log*
+
+# User local data
+data/user_data.json
+data/user_submissions.json
+
+# Local temp test runners
+.test_tmp*

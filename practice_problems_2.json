@@ -1,0 +1,85 @@
+{
+  "meta": {
+    "description": "Second batch of coding practice problems (BST set). Same schema as practice_problems.json, so both files can be merged into one list.",
+    "total_problems": 4,
+    "mod_constant": 1000000007,
+    "type_conventions": {
+      "int": "single integer",
+      "string": "plain string",
+      "int_array": "array of integers",
+      "binary_tree": "Tree serialized as PREORDER traversal, space separated, where -1 means NULL child. Example: '6 9 4 -1 -1 8 -1 -1 3 -1 -1' is 6 with left child 9 (children 4 and 8) and right child 3.",
+      "matrix": "2D array of integers"
+    },
+    "notes_for_builder": [
+      "Where input says binary_tree, parse the preorder -1 format into nodes before calling the user's function.",
+      "Several problems allow up to 10^5 to 10^6 nodes, so skewed trees can be very deep. Prefer iterative solutions or raise the recursion limit.",
+      "Examples are the only guaranteed test cases here. Generate extra tests (edge cases and large inputs) using a reference solution."
+    ]
+  },
+  "problems": [
+    {
+      "id": "two-sum-bst",
+      "title": "Two Sum BST",
+      "topic": "Trees / BST",
+      "tags": ["bst", "two-pointers", "inorder", "hashing"],
+      "description": "Given a binary search tree A where each node holds a positive integer, and an integer B, determine whether there exist two different nodes X and Y such that X.value + Y.value = B. Return 1 if such a pair exists, else 0.",
+      "constraints": ["1 <= size of tree <= 100000", "1 <= B <= 10^9", "All node values are positive integers"],
+      "input_format": "The first argument is the root of the BST A, the second is the integer B.",
+      "output_format": "Return 1 if such a pair exists, else 0.",
+      "function": {"name": "t2Sum", "params": [{"name": "A", "type": "binary_tree"}, {"name": "B", "type": "int"}], "returns": "int"},
+      "examples": [
+        {"input": {"A": "10 9 -1 -1 20 -1 -1", "B": "19"}, "output": "1", "explanation": "10 + 9 = 19."},
+        {"input": {"A": "10 9 -1 -1 20 -1 -1", "B": "40"}, "output": "0", "explanation": "No such pair exists. Note that 20 + 20 does not count because the two nodes must be different."}
+      ],
+      "notes": ["Approaches: inorder traversal into a sorted array plus two pointers, or a hash set while traversing, or two BST iterators (forward and reverse) for O(h) space.", "A single node cannot be paired with itself, even if B = 2 * value."]
+    },
+    {
+      "id": "common-nodes-in-two-bst",
+      "title": "Common Nodes in Two BST",
+      "topic": "Trees / BST",
+      "tags": ["bst", "two-pointers", "inorder", "stack", "modular-arithmetic"],
+      "description": "Given two BSTs A and B, return the sum of all values that appear in both trees, modulo 10^9+7. If there is no common node, return 0. Try to solve it in one pass through the trees.",
+      "constraints": ["1 <= number of nodes in each of A and B <= 10^5", "1 <= node value <= 10^6"],
+      "input_format": "The first argument is the root of BST A, the second is the root of BST B.",
+      "output_format": "An integer: (sum of common node values) % (10^9+7).",
+      "function": {"name": "solve", "params": [{"name": "A", "type": "binary_tree"}, {"name": "B", "type": "binary_tree"}], "returns": "int"},
+      "examples": [
+        {"input": {"A": "5 2 -1 3 -1 -1 8 -1 15 9 -1 -1 -1", "B": "7 1 -1 2 -1 -1 10 -1 15 11 -1 -1 -1"}, "output": "17", "explanation": "Common values are 2 and 15, so 2 + 15 = 17."},
+        {"input": {"A": "7 1 -1 2 -1 -1 10 -1 15 11 -1 -1 -1", "B": "7 1 -1 2 -1 -1 10 -1 15 11 -1 -1 -1"}, "output": "46", "explanation": "Both trees are identical: 7 + 2 + 1 + 10 + 15 + 11 = 46."}
+      ],
+      "notes": ["One-pass approach: run two stack-based inorder iterators and merge them like two sorted lists, adding a value when both heads match.", "Sums can reach about 10^11 before the modulus, so use 64-bit integers.", "The statement assumes values are unique within each BST. If duplicates were possible, the intended behavior would be ambiguous."]
+    },
+    {
+      "id": "bst-nodes-in-a-range",
+      "title": "BST nodes in a range",
+      "topic": "Trees / BST",
+      "tags": ["bst", "range-query", "pruning", "dfs"],
+      "description": "Given a binary search tree of integers and a range [B, C], return the count of nodes whose values lie in the range (inclusive on both ends).",
+      "constraints": ["1 <= number of nodes <= 100000", "0 <= B <= C <= 10^9"],
+      "input_format": "The first argument is the root of the BST A, the second is the integer B, the third is the integer C.",
+      "output_format": "An integer: the count of nodes with B <= value <= C.",
+      "function": {"name": "solve", "params": [{"name": "A", "type": "binary_tree"}, {"name": "B", "type": "int"}, {"name": "C", "type": "int"}], "returns": "int"},
+      "examples": [
+        {"input": {"A": "15 12 10 8 -1 -1 -1 14 -1 -1 20 16 -1 -1 27 -1 -1", "B": "12", "C": "20"}, "output": "5", "explanation": "Nodes in [12, 20] are 12, 14, 15, 20 and 16."},
+        {"input": {"A": "8 6 1 -1 -1 7 -1 -1 21 -1 -1", "B": "2", "C": "20"}, "output": "3", "explanation": "Nodes in [2, 20] are 8, 6 and 7."}
+      ],
+      "notes": ["Use BST pruning: skip the left subtree if value < B, skip the right subtree if value > C. Both bounds are inclusive."]
+    },
+    {
+      "id": "distance-between-nodes-of-bst",
+      "title": "Distance between Nodes of BST",
+      "topic": "Trees / BST",
+      "tags": ["bst", "lca", "distance"],
+      "description": "Given a binary search tree, return the distance between the two nodes with keys B and C. Both keys are guaranteed to exist in the BST. Distance is the number of edges on the path between them.",
+      "constraints": ["1 <= number of nodes <= 1000000", "0 <= node value <= 10^9", "B and C are guaranteed to exist in the BST"],
+      "input_format": "The first argument is the root of the BST A, the second is the integer B, the third is the integer C.",
+      "output_format": "An integer: the number of edges between the nodes with keys B and C.",
+      "function": {"name": "solve", "params": [{"name": "A", "type": "binary_tree"}, {"name": "B", "type": "int"}, {"name": "C", "type": "int"}], "returns": "int"},
+      "examples": [
+        {"input": {"A": "5 2 1 -1 -1 4 -1 -1 8 6 -1 -1 11 -1 -1", "B": "2", "C": "11"}, "output": "3", "explanation": "Path is 2 -> 5 -> 8 -> 11, so the distance is 3."},
+        {"input": {"A": "6 2 1 -1 -1 4 -1 -1 9 7 -1 -1 10 -1 -1", "B": "2", "C": "6"}, "output": "1", "explanation": "Path is 2 -> 6, so the distance is 1."}
+      ],
+      "notes": ["Find the LCA by walking down from the root (go left if both keys are smaller, right if both are larger, otherwise stop). The answer is dist(LCA, B) + dist(LCA, C), where each part is found by BST descent.", "Edge case: if B == C, the distance is 0.", "With up to 10^6 nodes a skewed tree is very deep, so use an iterative solution."]
+    }
+  ]
+}

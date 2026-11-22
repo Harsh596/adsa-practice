@@ -1,0 +1,1585 @@
+{
+  "meta": {
+    "description": "Dataset of coding practice problems for a random-practice website. Each problem has a statement, constraints, a function signature, and examples usable as test cases.",
+    "total_problems": 31,
+    "mod_constant": 1000000007,
+    "type_conventions": {
+      "int": "single integer",
+      "string": "plain string",
+      "int_array": "array of integers",
+      "binary_tree": "Tree serialized as PREORDER traversal, space separated, where -1 means NULL child. Example: '6 9 4 -1 -1 8 -1 -1 3 -1 -1' is 6 with left child 9 (children 4 and 8) and right child 3.",
+      "matrix": "2D array of integers"
+    },
+    "notes_for_builder": [
+      "Problems marked grader='custom_validator' have multiple valid outputs, so exact string comparison will wrongly fail correct answers.",
+      "Where input says binary_tree, parse the preorder -1 format into nodes before calling the user's function.",
+      "Problems with large outputs or constraints need a time limit when judging.",
+      "Examples are the only guaranteed test cases here. Generate extra tests (edge cases and large inputs) using a reference solution."
+    ]
+  },
+  "problems": [
+    {
+      "id": "find-leaves-of-binary-tree",
+      "title": "Find Leaves of Binary Tree",
+      "topic": "Trees",
+      "tags": [
+        "binary-tree",
+        "dfs",
+        "height"
+      ],
+      "description": "Given the root A of a binary tree, repeatedly collect all leaf nodes, remove them from the tree, and repeat until the tree is empty. Return the list of collected groups in the order they were peeled off (leaves first, root last). Within each group, values must be in ascending order.",
+      "constraints": [
+        "1 <= number of nodes <= 10^5",
+        "1 <= node value <= 10^5",
+        "Node values are not necessarily distinct"
+      ],
+      "input_format": "The only argument is the root A of the binary tree.",
+      "output_format": "A list of integer lists. The i-th inner list holds the values removed in the i-th pass, sorted ascending.",
+      "function": {
+        "name": "findLeaves",
+        "params": [
+          {
+            "name": "A",
+            "type": "binary_tree"
+          }
+        ],
+        "returns": "list<list<int>>"
+      },
+      "examples": [
+        {
+          "input": {
+            "A": "1 2 4 -1 -1 5 -1 -1 3 -1 -1"
+          },
+          "output": "[[3, 4, 5], [2], [1]]",
+          "explanation": "Pass 1 leaves are 4, 5, 3 sorted to [3,4,5]. Pass 2: only 2 is a leaf. Pass 3: only root 1 remains."
+        },
+        {
+          "input": {
+            "A": "1 -1 -1"
+          },
+          "output": "[[1]]",
+          "explanation": "The root itself is the only leaf."
+        }
+      ],
+      "notes": [
+        "A node's pass number equals its height (leaf = 0), so one DFS plus bucketing and sorting works."
+      ]
+    },
+    {
+      "id": "tower-of-hanoi",
+      "title": "Tower of Hanoi",
+      "topic": "Recursion",
+      "tags": [
+        "recursion"
+      ],
+      "description": "There are 3 towers numbered 1 to 3 (left to right) and A disks numbered 1 to A (top to bottom, disk 1 smallest). Disks start sorted on tower 1 with the smallest on top. Move all disks to tower 3. Only one disk moves at a time, taken from the top of a tower, and a disk can never be placed on a smaller disk. Return the minimum-move solution as an M x 3 array where each row is (disk, start, end).",
+      "constraints": [
+        "1 <= A <= 18"
+      ],
+      "input_format": "The first argument is the integer A.",
+      "output_format": "A 2D array of M x 3 integers, where M = 2^A - 1.",
+      "function": {
+        "name": "towerOfHanoi",
+        "params": [
+          {
+            "name": "A",
+            "type": "int"
+          }
+        ],
+        "returns": "matrix"
+      },
+      "examples": [
+        {
+          "input": {
+            "A": "2"
+          },
+          "output": "[[1,1,2],[2,1,3],[1,2,3]]",
+          "explanation": "Move disk 1 to the middle tower, disk 2 to the last tower, then disk 1 onto the last tower."
+        },
+        {
+          "input": {
+            "A": "3"
+          },
+          "output": "[[1,1,3],[2,1,2],[1,3,2],[3,1,3],[1,2,1],[2,2,3],[1,1,3]]",
+          "explanation": "The unique minimal-move solution."
+        }
+      ],
+      "notes": [
+        "Standard recursive solution: move n-1 disks to the helper tower, move disk n, then move n-1 disks on top. Max output is 262143 rows."
+      ]
+    },
+    {
+      "id": "check-palindrome-recursion",
+      "title": "Check Palindrome using Recursion",
+      "topic": "Recursion",
+      "tags": [
+        "recursion",
+        "strings"
+      ],
+      "description": "Write a recursive function that checks whether string A is a palindrome. Return 1 if it is, else 0.",
+      "constraints": [
+        "1 <= |A| <= 50000",
+        "A consists only of lowercase letters"
+      ],
+      "input_format": "The only argument is a string A.",
+      "output_format": "Return 1 if A is a palindrome, else 0.",
+      "function": {
+        "name": "isPalindrome",
+        "params": [
+          {
+            "name": "A",
+            "type": "string"
+          }
+        ],
+        "returns": "int"
+      },
+      "examples": [
+        {
+          "input": {
+            "A": "naman"
+          },
+          "output": "1",
+          "explanation": "'naman' reads the same both ways."
+        },
+        {
+          "input": {
+            "A": "strings"
+          },
+          "output": "0",
+          "explanation": "'strings' is not a palindrome."
+        }
+      ],
+      "notes": [
+        "Recursion depth can reach about 25000 with two-pointer recursion, so raise the recursion limit in languages like Python."
+      ]
+    },
+    {
+      "id": "count-good-subsequences",
+      "title": "Count Good Subsequences",
+      "topic": "Math / Combinatorics",
+      "tags": [
+        "combinatorics",
+        "frequency",
+        "dp",
+        "modular-arithmetic"
+      ],
+      "description": "An array is good if every distinct value present has the same frequency. For example [2,3,3,2] is good, but [2,3,2] is not. Given array A, count the non-empty good subsequences of A modulo 10^9+7. Subsequences are identified by their index sets, so equal multisets from different indices count separately.",
+      "constraints": [
+        "1 <= |A| <= 2*10^5",
+        "1 <= A[i] <= 10^9"
+      ],
+      "input_format": "The only argument is the integer array A.",
+      "output_format": "A single integer: the count of non-empty good subsequences modulo 10^9+7.",
+      "function": {
+        "name": "countGoodSubsequences",
+        "params": [
+          {
+            "name": "A",
+            "type": "int_array"
+          }
+        ],
+        "returns": "int"
+      },
+      "examples": [
+        {
+          "input": {
+            "A": "[1, 2, 1]"
+          },
+          "output": "6",
+          "explanation": "Frequency 1: three singletons plus pairs {0,1} and {1,2} = 5. Frequency 2: {0,2} = 1. Total 6."
+        },
+        {
+          "input": {
+            "A": "[5, 10, 2]"
+          },
+          "output": "7",
+          "explanation": "All values distinct, so every non-empty subset is good: 2^3 - 1 = 7."
+        }
+      ],
+      "notes": [
+        "For each frequency k, the answer is the product over distinct values of (1 + C(cnt, k)) minus 1, summed over k. Needs precomputed factorials and inverse factorials."
+      ]
+    },
+    {
+      "id": "ncr-mod-m",
+      "title": "Compute nCr % m",
+      "topic": "Math / Combinatorics",
+      "tags": [
+        "combinatorics",
+        "dp",
+        "pascal-triangle"
+      ],
+      "description": "Given integers A (n), B (r) and C (m), return nCr % m where nCr = n! / ((n-r)! * r!).",
+      "constraints": [
+        "1 <= A * B <= 10^6",
+        "1 <= B <= A",
+        "1 <= C <= 10^6"
+      ],
+      "input_format": "A = n, B = r, C = m.",
+      "output_format": "The value of nCr % m.",
+      "function": {
+        "name": "solve",
+        "params": [
+          {
+            "name": "A",
+            "type": "int"
+          },
+          {
+            "name": "B",
+            "type": "int"
+          },
+          {
+            "name": "C",
+            "type": "int"
+          }
+        ],
+        "returns": "int"
+      },
+      "examples": [
+        {
+          "input": {
+            "A": "5",
+            "B": "2",
+            "C": "13"
+          },
+          "output": "10",
+          "explanation": "5C2 = 10, 10 % 13 = 10."
+        },
+        {
+          "input": {
+            "A": "6",
+            "B": "2",
+            "C": "13"
+          },
+          "output": "2",
+          "explanation": "6C2 = 15, 15 % 13 = 2."
+        }
+      ],
+      "notes": [
+        "m is NOT guaranteed to be prime, so modular inverse does not work. Use Pascal's-triangle DP in O(A*B), which the constraint A*B <= 10^6 hints at.",
+        "Original statement had a typo ('% 11' instead of '% 13') in example 1; fixed here."
+      ]
+    },
+    {
+      "id": "grid-unique-paths",
+      "title": "Grid Unique Paths",
+      "topic": "Math / Combinatorics",
+      "tags": [
+        "combinatorics",
+        "dp",
+        "grid"
+      ],
+      "description": "A robot starts at the top-left of an A x B grid and can only move down or right. Return the number of unique paths to the bottom-right corner.",
+      "constraints": [
+        "A and B are chosen so the answer fits in a 32-bit signed integer"
+      ],
+      "input_format": "A = number of rows, B = number of columns.",
+      "output_format": "A single integer: the number of unique paths.",
+      "function": {
+        "name": "uniquePaths",
+        "params": [
+          {
+            "name": "A",
+            "type": "int"
+          },
+          {
+            "name": "B",
+            "type": "int"
+          }
+        ],
+        "returns": "int"
+      },
+      "examples": [
+        {
+          "input": {
+            "A": "2",
+            "B": "2"
+          },
+          "output": "2",
+          "explanation": "Right-then-down or down-then-right."
+        },
+        {
+          "input": {
+            "A": "3",
+            "B": "3"
+          },
+          "output": "6",
+          "explanation": "C(4,2) = 6 orderings of 2 downs and 2 rights."
+        }
+      ],
+      "notes": [
+        "Answer is C(A+B-2, A-1). Compute iteratively with a 64-bit integer to avoid overflow."
+      ]
+    },
+    {
+      "id": "pascal-triangle",
+      "title": "Pascal Triangle",
+      "topic": "Math / Combinatorics",
+      "tags": [
+        "pascal-triangle",
+        "dp",
+        "matrix"
+      ],
+      "description": "Generate Pascal's triangle up to A rows.",
+      "constraints": [
+        "1 <= A <= 25"
+      ],
+      "input_format": "The first argument is the integer A.",
+      "output_format": "A 2D array of A rows, each containing A integers. Row i holds the i-th row of Pascal's triangle padded with trailing zeros.",
+      "function": {
+        "name": "solve",
+        "params": [
+          {
+            "name": "A",
+            "type": "int"
+          }
+        ],
+        "returns": "matrix"
+      },
+      "examples": [
+        {
+          "input": {
+            "A": "3"
+          },
+          "output": "[[1,0,0],[1,1,0],[1,2,1]]",
+          "explanation": "Row 2 = 1C0, 1C1, 0. Row 3 = 2C0, 2C1, 2C2."
+        },
+        {
+          "input": {
+            "A": "5"
+          },
+          "output": "[[1,0,0,0,0],[1,1,0,0,0],[1,2,1,0,0],[1,3,3,1,0],[1,4,6,4,1]]",
+          "explanation": "Standard triangle, zero-padded to width A."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "consecutive-numbers-sum",
+      "title": "Consecutive Numbers Sum",
+      "topic": "Math",
+      "tags": [
+        "math",
+        "number-theory"
+      ],
+      "description": "Given a positive integer A, return the number of ways it can be written as a sum of consecutive positive integers.",
+      "constraints": [
+        "1 <= A <= 10^9"
+      ],
+      "input_format": "The only argument is the integer A.",
+      "output_format": "An integer: the number of ways.",
+      "function": {
+        "name": "solve",
+        "params": [
+          {
+            "name": "A",
+            "type": "int"
+          }
+        ],
+        "returns": "int"
+      },
+      "examples": [
+        {
+          "input": {
+            "A": "5"
+          },
+          "output": "2",
+          "explanation": "[5] and [2, 3]."
+        },
+        {
+          "input": {
+            "A": "15"
+          },
+          "output": "4",
+          "explanation": "[15], [7,8], [4,5,6], [1,2,3,4,5]."
+        }
+      ],
+      "notes": [
+        "Count k >= 1 with k*(k+1)/2 <= A and (A - k*(k-1)/2) divisible by k. That loop runs about sqrt(2A) times."
+      ]
+    },
+    {
+      "id": "sorted-permutation-rank",
+      "title": "Sorted Permutation Rank",
+      "topic": "Math / Combinatorics",
+      "tags": [
+        "permutations",
+        "rank",
+        "factorial",
+        "modular-arithmetic"
+      ],
+      "description": "Given a string A with no repeated characters, find its rank among all its permutations sorted lexicographically. Return the rank modulo 1000003.",
+      "constraints": [
+        "1 <= |A| <= 1000"
+      ],
+      "input_format": "The only argument is a string A.",
+      "output_format": "An integer: the rank of A modulo 1000003.",
+      "function": {
+        "name": "findRank",
+        "params": [
+          {
+            "name": "A",
+            "type": "string"
+          }
+        ],
+        "returns": "int"
+      },
+      "examples": [
+        {
+          "input": {
+            "A": "acb"
+          },
+          "output": "2",
+          "explanation": "Sorted permutations: abc, acb, bac, bca, cab, cba. 'acb' is 2nd."
+        },
+        {
+          "input": {
+            "A": "a"
+          },
+          "output": "1",
+          "explanation": "Only one permutation."
+        }
+      ],
+      "notes": [
+        "For each position, count characters to its right that are smaller and multiply by factorial of remaining length."
+      ]
+    },
+    {
+      "id": "combinations",
+      "title": "Combinations",
+      "topic": "Recursion / Backtracking",
+      "tags": [
+        "backtracking",
+        "recursion",
+        "combinations"
+      ],
+      "description": "Given integers A and B, return all combinations of B numbers chosen from 1..A. Each combination must be sorted internally and the list of combinations must be in sorted (lexicographic) order. Do NOT use library functions for generating combinations.",
+      "constraints": [
+        "1 <= A, B <= 10"
+      ],
+      "input_format": "A and B are integers.",
+      "output_format": "A 2D array of all combinations, sorted.",
+      "function": {
+        "name": "combine",
+        "params": [
+          {
+            "name": "A",
+            "type": "int"
+          },
+          {
+            "name": "B",
+            "type": "int"
+          }
+        ],
+        "returns": "matrix"
+      },
+      "examples": [
+        {
+          "input": {
+            "A": "4",
+            "B": "2"
+          },
+          "output": "[[1,2],[1,3],[1,4],[2,3],[2,4],[3,4]]",
+          "explanation": "All size-2 combinations in sorted order."
+        },
+        {
+          "input": {
+            "A": "3",
+            "B": "2"
+          },
+          "output": "[[1,2],[1,3],[2,3]]",
+          "explanation": "All size-2 combinations in sorted order."
+        }
+      ],
+      "notes": [
+        "Edge case: B > A has no valid combinations and should return an empty list (the original statement does not say, but it is the standard behavior)."
+      ]
+    },
+    {
+      "id": "excel-column-title",
+      "title": "Excel Column Title",
+      "topic": "Math / Strings",
+      "tags": [
+        "math",
+        "base-conversion",
+        "strings"
+      ],
+      "description": "Given a positive integer A, return its Excel column title. 1 -> A, 2 -> B, ..., 26 -> Z, 27 -> AA, 28 -> AB, and so on.",
+      "constraints": [
+        "1 <= A <= 10^9"
+      ],
+      "input_format": "The only argument is the integer A.",
+      "output_format": "A string: the column title.",
+      "function": {
+        "name": "convertToTitle",
+        "params": [
+          {
+            "name": "A",
+            "type": "int"
+          }
+        ],
+        "returns": "string"
+      },
+      "examples": [
+        {
+          "input": {
+            "A": "3"
+          },
+          "output": "C",
+          "explanation": "3 corresponds to C."
+        },
+        {
+          "input": {
+            "A": "27"
+          },
+          "output": "AA",
+          "explanation": "26 -> Z, 27 -> AA."
+        }
+      ],
+      "notes": [
+        "Bijective base-26: repeatedly do A -= 1; letter = 'A' + A % 26; A //= 26; then reverse."
+      ]
+    },
+    {
+      "id": "very-large-power",
+      "title": "Very Large Power",
+      "topic": "Math / Modular Arithmetic",
+      "tags": [
+        "modular-exponentiation",
+        "fermat",
+        "factorial"
+      ],
+      "description": "Given integers A and B, compute (A ^ (B!)) % (10^9 + 7), where ^ is power and ! is factorial.",
+      "constraints": [
+        "1 <= A, B <= 5*10^5"
+      ],
+      "input_format": "A and B are integers.",
+      "output_format": "One integer: the answer.",
+      "function": {
+        "name": "solve",
+        "params": [
+          {
+            "name": "A",
+            "type": "int"
+          },
+          {
+            "name": "B",
+            "type": "int"
+          }
+        ],
+        "returns": "int"
+      },
+      "examples": [
+        {
+          "input": {
+            "A": "1",
+            "B": "1"
+          },
+          "output": "1",
+          "explanation": "1! = 1, so 1^1 = 1."
+        },
+        {
+          "input": {
+            "A": "2",
+            "B": "2"
+          },
+          "output": "4",
+          "explanation": "2! = 2, so 2^2 = 4."
+        }
+      ],
+      "notes": [
+        "Since p = 10^9+7 is prime and A < p, Fermat's little theorem lets you compute B! modulo (p-1) and then do modular exponentiation. Use 64-bit math."
+      ]
+    },
+    {
+      "id": "ncr-mod-p",
+      "title": "Compute nCr % p",
+      "topic": "Math / Combinatorics",
+      "tags": [
+        "combinatorics",
+        "modular-inverse",
+        "fermat",
+        "lucas"
+      ],
+      "description": "Given integers A (n), B (r) and C (p), where p is a prime with p >= n, return nCr % p.",
+      "constraints": [
+        "1 <= A <= 10^6",
+        "1 <= B <= A",
+        "A <= C <= 10^9+7",
+        "C is a prime"
+      ],
+      "input_format": "A = n, B = r, C = p.",
+      "output_format": "The value of nCr % p.",
+      "function": {
+        "name": "solve",
+        "params": [
+          {
+            "name": "A",
+            "type": "int"
+          },
+          {
+            "name": "B",
+            "type": "int"
+          },
+          {
+            "name": "C",
+            "type": "int"
+          }
+        ],
+        "returns": "int"
+      },
+      "examples": [
+        {
+          "input": {
+            "A": "5",
+            "B": "2",
+            "C": "13"
+          },
+          "output": "10",
+          "explanation": "5C2 = 10."
+        },
+        {
+          "input": {
+            "A": "6",
+            "B": "2",
+            "C": "13"
+          },
+          "output": "2",
+          "explanation": "6C2 = 15, 15 % 13 = 2."
+        }
+      ],
+      "notes": [
+        "Edge case: C can equal A, in which case n! is divisible by p and the plain factorial/inverse approach breaks. Compute with the product formula (skipping the p factor) or Lucas' theorem.",
+        "Test generators should include C == A where C is prime."
+      ]
+    },
+    {
+      "id": "prime-modulo-inverse",
+      "title": "Prime Modulo Inverse",
+      "topic": "Math / Modular Arithmetic",
+      "tags": [
+        "modular-inverse",
+        "fermat",
+        "fast-exponentiation"
+      ],
+      "description": "Given integers A and B, find A^-1 mod B, where B is a prime and gcd(A, B) = 1. This is the modular multiplicative inverse: the X such that (A * X) % B = 1.",
+      "constraints": [
+        "1 <= A <= 10^9",
+        "2 <= B <= 10^9",
+        "B is a prime"
+      ],
+      "input_format": "A and B are integers.",
+      "output_format": "An integer: the modular inverse.",
+      "function": {
+        "name": "solve",
+        "params": [
+          {
+            "name": "A",
+            "type": "int"
+          },
+          {
+            "name": "B",
+            "type": "int"
+          }
+        ],
+        "returns": "int"
+      },
+      "examples": [
+        {
+          "input": {
+            "A": "3",
+            "B": "5"
+          },
+          "output": "2",
+          "explanation": "3 * 2 = 6, 6 % 5 = 1."
+        },
+        {
+          "input": {
+            "A": "6",
+            "B": "23"
+          },
+          "output": "4",
+          "explanation": "6 * 4 = 24, 24 % 23 = 1."
+        }
+      ],
+      "notes": [
+        "Use A^(B-2) mod B via fast exponentiation since B is prime (Fermat's Little Theorem)."
+      ]
+    },
+    {
+      "id": "yet-another-matrix-question",
+      "title": "Yet another MATRIX question !!",
+      "topic": "Math / Combinatorics",
+      "tags": [
+        "combinatorics",
+        "matrix",
+        "modular-arithmetic"
+      ],
+      "description": "A matrix of size A x B is filled with 1s. You may flip any subset of cells from 1 to -1. Count the number of ways to flip cells so that the sum of every column is 0. Return the answer modulo 10^9+7.",
+      "constraints": [
+        "1 <= A, B <= 1000"
+      ],
+      "input_format": "A = number of rows, B = number of columns.",
+      "output_format": "A single integer: the number of ways modulo 10^9+7.",
+      "function": {
+        "name": "solve",
+        "params": [
+          {
+            "name": "A",
+            "type": "int"
+          },
+          {
+            "name": "B",
+            "type": "int"
+          }
+        ],
+        "returns": "int"
+      },
+      "examples": [
+        {
+          "input": {
+            "A": "1",
+            "B": "1"
+          },
+          "output": "0",
+          "explanation": "A single cell has sum 1 or -1, never 0."
+        },
+        {
+          "input": {
+            "A": "2",
+            "B": "1"
+          },
+          "output": "2",
+          "explanation": "Flip exactly one of the two cells: 2 ways."
+        }
+      ],
+      "notes": [
+        "If A is odd, the answer is 0. If A is even, each column needs exactly A/2 flips, so the answer is C(A, A/2)^B mod p."
+      ]
+    },
+    {
+      "id": "excel-column-number",
+      "title": "Excel Column Number",
+      "topic": "Math / Strings",
+      "tags": [
+        "math",
+        "base-conversion",
+        "strings"
+      ],
+      "description": "Given an Excel column title, return its column number. A -> 1, ..., Z -> 26, AA -> 27, AB -> 28, and so on.",
+      "constraints": [
+        "1 <= length of the title <= 5"
+      ],
+      "input_format": "The only argument is a string representing the column title.",
+      "output_format": "A single integer: the column number.",
+      "function": {
+        "name": "titleToNumber",
+        "params": [
+          {
+            "name": "A",
+            "type": "string"
+          }
+        ],
+        "returns": "int"
+      },
+      "examples": [
+        {
+          "input": {
+            "A": "AB"
+          },
+          "output": "28",
+          "explanation": "A=1, B=2, ..., AA=27, AB=28."
+        },
+        {
+          "input": {
+            "A": "BB"
+          },
+          "output": "54",
+          "explanation": "BA = 53, BB = 54."
+        }
+      ],
+      "notes": [
+        "Treat as base-26 with digits 1..26: result = result*26 + (c - 'A' + 1)."
+      ]
+    },
+    {
+      "id": "sorted-permutation-rank-with-repeats",
+      "title": "Sorted Permutation Rank with Repeats",
+      "topic": "Math / Combinatorics",
+      "tags": [
+        "permutations",
+        "rank",
+        "multiset",
+        "modular-inverse",
+        "factorial"
+      ],
+      "description": "Given a string A, find its rank among its UNIQUE permutations sorted lexicographically (characters may repeat). Return the rank modulo 1000003 (a prime). The string can contain uppercase and lowercase letters, and ordering is by ASCII value, so 'Z' < 'a'.",
+      "constraints": [
+        "1 <= len(A) <= 1000000"
+      ],
+      "input_format": "The only argument is a string A.",
+      "output_format": "An integer: the rank modulo 1000003.",
+      "function": {
+        "name": "findRank",
+        "params": [
+          {
+            "name": "A",
+            "type": "string"
+          }
+        ],
+        "returns": "int"
+      },
+      "examples": [
+        {
+          "input": {
+            "A": "aba"
+          },
+          "output": "2",
+          "explanation": "Unique permutations in order: aab, aba, baa. 'aba' is 2nd."
+        },
+        {
+          "input": {
+            "A": "bca"
+          },
+          "output": "4",
+          "explanation": "abc, acb, bac, bca, cab, cba. 'bca' is 4th."
+        }
+      ],
+      "notes": [
+        "Maintain character counts and use a Fenwick tree (or a frequency array over 128 ASCII values) with modular inverses of the duplicate factorials. Length is below 1000003, so factorials mod p are never zero."
+      ]
+    },
+    {
+      "id": "ath-magical-number",
+      "title": "Ath Magical Number",
+      "topic": "Binary Search / Math",
+      "tags": [
+        "binary-search",
+        "lcm",
+        "inclusion-exclusion"
+      ],
+      "description": "A positive integer is magical if it is divisible by B or C. Return the A-th smallest magical number modulo 10^9+7.",
+      "constraints": [
+        "1 <= A <= 10^9",
+        "2 <= B, C <= 40000"
+      ],
+      "input_format": "A, B, C are integers.",
+      "output_format": "The A-th smallest magical number modulo 10^9+7.",
+      "function": {
+        "name": "solve",
+        "params": [
+          {
+            "name": "A",
+            "type": "int"
+          },
+          {
+            "name": "B",
+            "type": "int"
+          },
+          {
+            "name": "C",
+            "type": "int"
+          }
+        ],
+        "returns": "int"
+      },
+      "examples": [
+        {
+          "input": {
+            "A": "1",
+            "B": "2",
+            "C": "3"
+          },
+          "output": "2",
+          "explanation": "The 1st magical number is 2."
+        },
+        {
+          "input": {
+            "A": "4",
+            "B": "2",
+            "C": "3"
+          },
+          "output": "6",
+          "explanation": "First four are 2, 3, 4, 6."
+        }
+      ],
+      "notes": [
+        "Binary search on the answer x, counting magical numbers <= x as x/B + x/C - x/lcm(B,C). Use 64-bit integers, since the answer can reach about 4*10^13 before taking the modulus."
+      ]
+    },
+    {
+      "id": "sorted-array-to-balanced-bst",
+      "title": "Sorted Array To Balanced BST",
+      "topic": "Trees / BST",
+      "tags": [
+        "bst",
+        "binary-tree",
+        "divide-and-conquer",
+        "recursion"
+      ],
+      "description": "Given an array sorted in ascending order, convert it to a height-balanced Binary Search Tree. A height-balanced tree is one where the depths of the two subtrees of every node never differ by more than 1.",
+      "constraints": [
+        "1 <= length of array <= 100000"
+      ],
+      "input_format": "The first argument is an integer array A. On the original site the raw input is: size S, then S numbers.",
+      "output_format": "Return the root node of the BST.",
+      "function": {
+        "name": "sortedArrayToBST",
+        "params": [
+          {
+            "name": "A",
+            "type": "int_array"
+          }
+        ],
+        "returns": "binary_tree"
+      },
+      "grader": "custom_validator",
+      "examples": [
+        {
+          "input": {
+            "A": "[1, 2, 3]"
+          },
+          "output": "2 1 -1 -1 3 -1 -1",
+          "explanation": "Root 2 with children 1 and 3."
+        },
+        {
+          "input": {
+            "A": "[1, 2, 3, 5, 10]"
+          },
+          "output": "3 2 1 -1 -1 -1 5 -1 10 -1 -1",
+          "explanation": "One valid balanced BST."
+        }
+      ],
+      "notes": [
+        "Multiple valid trees exist (for even-length arrays you can pick either middle). The grader should check that the result is a valid BST, is height-balanced, and its inorder traversal equals the input, rather than comparing exact output."
+      ]
+    },
+    {
+      "id": "check-for-bst-with-one-child",
+      "title": "Check for BST with One Child",
+      "topic": "Trees / BST",
+      "tags": [
+        "bst",
+        "preorder",
+        "stack",
+        "bounds"
+      ],
+      "description": "Given the preorder traversal of a binary tree, check whether it can also be the preorder traversal of a BST in which every internal (non-leaf) node has exactly one child.",
+      "constraints": [
+        "1 <= number of nodes <= 100000"
+      ],
+      "input_format": "The only argument is an integer array denoting the preorder traversal.",
+      "output_format": "Return the string \"YES\" if possible, else \"NO\".",
+      "function": {
+        "name": "solve",
+        "params": [
+          {
+            "name": "A",
+            "type": "int_array"
+          }
+        ],
+        "returns": "string"
+      },
+      "examples": [
+        {
+          "input": {
+            "A": "[4, 10, 5, 8]"
+          },
+          "output": "YES",
+          "explanation": "BST: 4 -> right 10 -> left 5 -> right 8, each internal node has one child."
+        },
+        {
+          "input": {
+            "A": "[1, 5, 6, 4]"
+          },
+          "output": "NO",
+          "explanation": "No such BST exists."
+        }
+      ],
+      "notes": [
+        "Maintain an allowed (min, max) range that narrows with each next element. Each next value must stay within the range left by all previous nodes."
+      ]
+    },
+    {
+      "id": "search-in-bst",
+      "title": "Search in BST",
+      "topic": "Trees / BST",
+      "tags": [
+        "bst",
+        "search"
+      ],
+      "description": "Given a Binary Search Tree A, check whether a node with value B exists in it.",
+      "constraints": [
+        "1 <= number of nodes <= 10^5",
+        "0 <= B <= 10^6"
+      ],
+      "input_format": "A is the root of the BST, B is an integer.",
+      "output_format": "Return 1 if a node with value B exists, else 0.",
+      "function": {
+        "name": "solve",
+        "params": [
+          {
+            "name": "A",
+            "type": "binary_tree"
+          },
+          {
+            "name": "B",
+            "type": "int"
+          }
+        ],
+        "returns": "int"
+      },
+      "examples": [
+        {
+          "input": {
+            "A": "15 12 10 8 -1 -1 -1 14 -1 -1 20 16 -1 -1 27 -1 -1",
+            "B": "16"
+          },
+          "output": "1",
+          "explanation": "Node 16 is present."
+        },
+        {
+          "input": {
+            "A": "8 6 1 -1 -1 7 -1 -1 21 -1 -1",
+            "B": "9"
+          },
+          "output": "0",
+          "explanation": "No node with value 9."
+        }
+      ],
+      "notes": [
+        "Use an iterative loop to avoid deep recursion on skewed trees."
+      ]
+    },
+    {
+      "id": "valid-binary-search-tree",
+      "title": "Valid Binary Search Tree",
+      "topic": "Trees / BST",
+      "tags": [
+        "bst",
+        "validation",
+        "bounds",
+        "inorder"
+      ],
+      "description": "Given a binary tree, check whether it is a valid BST. The left subtree of a node contains only keys less than the node's key, the right subtree contains only keys greater, and both subtrees must also be BSTs.",
+      "constraints": [
+        "1 <= number of nodes <= 10^5",
+        "0 <= node value <= 2^32 - 1"
+      ],
+      "input_format": "The only argument is the root of the binary tree A.",
+      "output_format": "Return 1 if it is a BST, else 0.",
+      "function": {
+        "name": "isValidBST",
+        "params": [
+          {
+            "name": "A",
+            "type": "binary_tree"
+          }
+        ],
+        "returns": "int"
+      },
+      "examples": [
+        {
+          "input": {
+            "A": "1 2 -1 -1 3 -1 -1"
+          },
+          "output": "0",
+          "explanation": "2 is in the left subtree of 1 but is not less than 1."
+        },
+        {
+          "input": {
+            "A": "2 1 -1 -1 3 -1 -1"
+          },
+          "output": "1",
+          "explanation": "Satisfies all conditions."
+        }
+      ],
+      "notes": [
+        "Values go up to 2^32-1, so use 64-bit integers for the min/max bounds. Inequalities are strict, so duplicates make the tree invalid."
+      ]
+    },
+    {
+      "id": "largest-bst-subtree",
+      "title": "Largest BST Subtree",
+      "topic": "Trees / BST",
+      "tags": [
+        "bst",
+        "dfs",
+        "postorder",
+        "subtree"
+      ],
+      "description": "Given a binary tree with N nodes, return the size of the largest subtree that is also a BST. If the whole tree is a BST, return the size of the whole tree.",
+      "constraints": [
+        "1 <= N <= 10^5"
+      ],
+      "input_format": "The only argument is the root of the binary tree A.",
+      "output_format": "A single integer: the size of the largest BST subtree.",
+      "function": {
+        "name": "solve",
+        "params": [
+          {
+            "name": "A",
+            "type": "binary_tree"
+          }
+        ],
+        "returns": "int"
+      },
+      "examples": [
+        {
+          "input": {
+            "A": "10 5 1 -1 -1 8 -1 -1 15 -1 7 -1 -1"
+          },
+          "output": "3",
+          "explanation": "The subtree rooted at 5 (nodes 5, 1, 8) is the largest BST."
+        },
+        {
+          "input": {
+            "A": "5 3 1 -1 -1 4 -1 -1 8 7 -1 -1 9 -1 -1"
+          },
+          "output": "7",
+          "explanation": "The whole tree is a BST."
+        }
+      ],
+      "notes": [
+        "Postorder DFS returning (isBST, size, min, max) for each subtree gives O(N)."
+      ]
+    },
+    {
+      "id": "delete-a-node-in-bst",
+      "title": "Delete a node in BST",
+      "topic": "Trees / BST",
+      "tags": [
+        "bst",
+        "deletion",
+        "inorder-predecessor"
+      ],
+      "description": "Given a BST A, if a node with value B exists, delete it and return the root of the resulting tree. When a node with two children is deleted, replace it with its in-order predecessor.",
+      "constraints": [
+        "2 <= number of nodes <= 10^5",
+        "1 <= node value <= 10^9",
+        "All node values are unique"
+      ],
+      "input_format": "A is the root of the BST, B is the value to delete.",
+      "output_format": "Return the root of the BST after deletion.",
+      "function": {
+        "name": "deleteNode",
+        "params": [
+          {
+            "name": "A",
+            "type": "binary_tree"
+          },
+          {
+            "name": "B",
+            "type": "int"
+          }
+        ],
+        "returns": "binary_tree"
+      },
+      "examples": [
+        {
+          "input": {
+            "A": "15 12 10 8 -1 -1 -1 14 -1 -1 20 16 -1 -1 27 -1 -1",
+            "B": "10"
+          },
+          "output": "15 12 8 -1 -1 14 -1 -1 20 16 -1 -1 27 -1 -1",
+          "explanation": "Node 10 has only a left child 8, which takes its place."
+        },
+        {
+          "input": {
+            "A": "8 6 1 -1 -1 7 -1 -1 21 -1 -1",
+            "B": "6"
+          },
+          "output": "8 1 -1 7 -1 -1 21 -1 -1",
+          "explanation": "Node 6 has two children and is replaced by its in-order predecessor 1; 7 becomes the right child of 1."
+        }
+      ],
+      "notes": [
+        "If B is not in the tree, return the tree unchanged. The predecessor rule is what makes the output unique, so exact tree comparison is fine here.",
+        "In-order predecessor = the rightmost node of the left subtree."
+      ]
+    },
+    {
+      "id": "kth-smallest-element-in-bst",
+      "title": "Kth Smallest Element In BST",
+      "topic": "Trees / BST",
+      "tags": [
+        "bst",
+        "inorder",
+        "iterative"
+      ],
+      "description": "Given a BST with root A, find the B-th smallest element in the tree.",
+      "constraints": [
+        "1 <= number of nodes <= 100000",
+        "0 <= node value <= 10^9"
+      ],
+      "input_format": "The first argument is the root of the BST A, the second is the integer B.",
+      "output_format": "An integer: the B-th smallest value.",
+      "function": {
+        "name": "kthsmallest",
+        "params": [
+          {
+            "name": "A",
+            "type": "binary_tree"
+          },
+          {
+            "name": "B",
+            "type": "int"
+          }
+        ],
+        "returns": "int"
+      },
+      "examples": [
+        {
+          "input": {
+            "A": "2 1 -1 -1 3 -1 -1",
+            "B": "2"
+          },
+          "output": "2",
+          "explanation": "Inorder is 1, 2, 3, so the 2nd is 2."
+        },
+        {
+          "input": {
+            "A": "3 2 1 -1 -1 -1 -1",
+            "B": "1"
+          },
+          "output": "1",
+          "explanation": "Left-skewed tree 3 -> 2 -> 1, smallest is 1."
+        }
+      ],
+      "notes": [
+        "Original statement's input section forgot to mention B as an argument. It is there in the examples, so it is included here.",
+        "Use iterative inorder to avoid stack overflow on skewed trees."
+      ]
+    },
+    {
+      "id": "path-to-given-node",
+      "title": "Path to Given Node",
+      "topic": "Trees",
+      "tags": [
+        "binary-tree",
+        "dfs",
+        "backtracking"
+      ],
+      "description": "Given a binary tree A with N nodes and a target value B, return the sequence of node values on the path from the root to the node with value B.",
+      "constraints": [
+        "1 <= N <= 10^5",
+        "1 <= node value <= N",
+        "1 <= B <= N",
+        "All node values are distinct",
+        "B is guaranteed to exist in the tree"
+      ],
+      "input_format": "The first argument is the root of the binary tree A, the second is the integer B.",
+      "output_format": "A 1D integer array: node values on the path from the root to B, in order.",
+      "function": {
+        "name": "solve",
+        "params": [
+          {
+            "name": "A",
+            "type": "binary_tree"
+          },
+          {
+            "name": "B",
+            "type": "int"
+          }
+        ],
+        "returns": "int_array"
+      },
+      "examples": [
+        {
+          "input": {
+            "A": "1 2 4 -1 -1 5 -1 -1 3 6 -1 -1 7 -1 -1",
+            "B": "5"
+          },
+          "output": "[1, 2, 5]",
+          "explanation": "Root 1, left to 2, right to 5."
+        },
+        {
+          "input": {
+            "A": "1 2 4 -1 -1 5 -1 -1 3 -1 6 -1 -1",
+            "B": "1"
+          },
+          "output": "[1]",
+          "explanation": "The target is the root itself."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "morris-inorder-traversal",
+      "title": "Morris Inorder Traversal",
+      "topic": "Trees",
+      "tags": [
+        "binary-tree",
+        "inorder",
+        "morris",
+        "threaded-tree"
+      ],
+      "description": "Given a binary tree, return the inorder traversal of its node values. Recursion and an explicit stack are NOT allowed (use Morris traversal, O(1) extra space).",
+      "constraints": [
+        "1 <= number of nodes <= 10^5"
+      ],
+      "input_format": "The only argument is the root of the binary tree A.",
+      "output_format": "An integer array: the inorder traversal.",
+      "function": {
+        "name": "inorderTraversal",
+        "params": [
+          {
+            "name": "A",
+            "type": "binary_tree"
+          }
+        ],
+        "returns": "int_array"
+      },
+      "examples": [
+        {
+          "input": {
+            "A": "1 -1 2 3 -1 -1 -1"
+          },
+          "output": "[1, 3, 2]",
+          "explanation": "Tree 1 -> right 2 -> left 3."
+        },
+        {
+          "input": {
+            "A": "1 6 -1 -1 2 3 -1 -1 -1"
+          },
+          "output": "[6, 1, 3, 2]",
+          "explanation": "Root 1 has left 6 and right 2, where 2 has left child 3."
+        }
+      ],
+      "notes": [
+        "The 'no recursion or stack' rule can't be enforced automatically by a simple output check. A site would need static checks on the code if it wants to enforce it, or it can just be shown as a rule."
+      ]
+    },
+    {
+      "id": "two-sum-bst",
+      "title": "Two Sum BST",
+      "topic": "Trees / BST",
+      "tags": [
+        "bst",
+        "two-pointers",
+        "inorder",
+        "hashing"
+      ],
+      "description": "Given a binary search tree A where each node holds a positive integer, and an integer B, determine whether there exist two different nodes X and Y such that X.value + Y.value = B. Return 1 if such a pair exists, else 0.",
+      "constraints": [
+        "1 <= size of tree <= 100000",
+        "1 <= B <= 10^9",
+        "All node values are positive integers"
+      ],
+      "input_format": "The first argument is the root of the BST A, the second is the integer B.",
+      "output_format": "Return 1 if such a pair exists, else 0.",
+      "function": {
+        "name": "t2Sum",
+        "params": [
+          {
+            "name": "A",
+            "type": "binary_tree"
+          },
+          {
+            "name": "B",
+            "type": "int"
+          }
+        ],
+        "returns": "int"
+      },
+      "examples": [
+        {
+          "input": {
+            "A": "10 9 -1 -1 20 -1 -1",
+            "B": "19"
+          },
+          "output": "1",
+          "explanation": "10 + 9 = 19."
+        },
+        {
+          "input": {
+            "A": "10 9 -1 -1 20 -1 -1",
+            "B": "40"
+          },
+          "output": "0",
+          "explanation": "No such pair exists. Note that 20 + 20 does not count because the two nodes must be different."
+        }
+      ],
+      "notes": [
+        "Approaches: inorder traversal into a sorted array plus two pointers, or a hash set while traversing, or two BST iterators (forward and reverse) for O(h) space.",
+        "A single node cannot be paired with itself, even if B = 2 * value."
+      ]
+    },
+    {
+      "id": "common-nodes-in-two-bst",
+      "title": "Common Nodes in Two BST",
+      "topic": "Trees / BST",
+      "tags": [
+        "bst",
+        "two-pointers",
+        "inorder",
+        "stack",
+        "modular-arithmetic"
+      ],
+      "description": "Given two BSTs A and B, return the sum of all values that appear in both trees, modulo 10^9+7. If there is no common node, return 0. Try to solve it in one pass through the trees.",
+      "constraints": [
+        "1 <= number of nodes in each of A and B <= 10^5",
+        "1 <= node value <= 10^6"
+      ],
+      "input_format": "The first argument is the root of BST A, the second is the root of BST B.",
+      "output_format": "An integer: (sum of common node values) % (10^9+7).",
+      "function": {
+        "name": "solve",
+        "params": [
+          {
+            "name": "A",
+            "type": "binary_tree"
+          },
+          {
+            "name": "B",
+            "type": "binary_tree"
+          }
+        ],
+        "returns": "int"
+      },
+      "examples": [
+        {
+          "input": {
+            "A": "5 2 -1 3 -1 -1 8 -1 15 9 -1 -1 -1",
+            "B": "7 1 -1 2 -1 -1 10 -1 15 11 -1 -1 -1"
+          },
+          "output": "17",
+          "explanation": "Common values are 2 and 15, so 2 + 15 = 17."
+        },
+        {
+          "input": {
+            "A": "7 1 -1 2 -1 -1 10 -1 15 11 -1 -1 -1",
+            "B": "7 1 -1 2 -1 -1 10 -1 15 11 -1 -1 -1"
+          },
+          "output": "46",
+          "explanation": "Both trees are identical: 7 + 2 + 1 + 10 + 15 + 11 = 46."
+        }
+      ],
+      "notes": [
+        "One-pass approach: run two stack-based inorder iterators and merge them like two sorted lists, adding a value when both heads match.",
+        "Sums can reach about 10^11 before the modulus, so use 64-bit integers.",
+        "The statement assumes values are unique within each BST. If duplicates were possible, the intended behavior would be ambiguous."
+      ]
+    },
+    {
+      "id": "bst-nodes-in-a-range",
+      "title": "BST nodes in a range",
+      "topic": "Trees / BST",
+      "tags": [
+        "bst",
+        "range-query",
+        "pruning",
+        "dfs"
+      ],
+      "description": "Given a binary search tree of integers and a range [B, C], return the count of nodes whose values lie in the range (inclusive on both ends).",
+      "constraints": [
+        "1 <= number of nodes <= 100000",
+        "0 <= B <= C <= 10^9"
+      ],
+      "input_format": "The first argument is the root of the BST A, the second is the integer B, the third is the integer C.",
+      "output_format": "An integer: the count of nodes with B <= value <= C.",
+      "function": {
+        "name": "solve",
+        "params": [
+          {
+            "name": "A",
+            "type": "binary_tree"
+          },
+          {
+            "name": "B",
+            "type": "int"
+          },
+          {
+            "name": "C",
+            "type": "int"
+          }
+        ],
+        "returns": "int"
+      },
+      "examples": [
+        {
+          "input": {
+            "A": "15 12 10 8 -1 -1 -1 14 -1 -1 20 16 -1 -1 27 -1 -1",
+            "B": "12",
+            "C": "20"
+          },
+          "output": "5",
+          "explanation": "Nodes in [12, 20] are 12, 14, 15, 20 and 16."
+        },
+        {
+          "input": {
+            "A": "8 6 1 -1 -1 7 -1 -1 21 -1 -1",
+            "B": "2",
+            "C": "20"
+          },
+          "output": "3",
+          "explanation": "Nodes in [2, 20] are 8, 6 and 7."
+        }
+      ],
+      "notes": [
+        "Use BST pruning: skip the left subtree if value < B, skip the right subtree if value > C. Both bounds are inclusive."
+      ]
+    },
+    {
+      "id": "distance-between-nodes-of-bst",
+      "title": "Distance between Nodes of BST",
+      "topic": "Trees / BST",
+      "tags": [
+        "bst",
+        "lca",
+        "distance"
+      ],
+      "description": "Given a binary search tree, return the distance between the two nodes with keys B and C. Both keys are guaranteed to exist in the BST. Distance is the number of edges on the path between them.",
+      "constraints": [
+        "1 <= number of nodes <= 1000000",
+        "0 <= node value <= 10^9",
+        "B and C are guaranteed to exist in the BST"
+      ],
+      "input_format": "The first argument is the root of the BST A, the second is the integer B, the third is the integer C.",
+      "output_format": "An integer: the number of edges between the nodes with keys B and C.",
+      "function": {
+        "name": "solve",
+        "params": [
+          {
+            "name": "A",
+            "type": "binary_tree"
+          },
+          {
+            "name": "B",
+            "type": "int"
+          },
+          {
+            "name": "C",
+            "type": "int"
+          }
+        ],
+        "returns": "int"
+      },
+      "examples": [
+        {
+          "input": {
+            "A": "5 2 1 -1 -1 4 -1 -1 8 6 -1 -1 11 -1 -1",
+            "B": "2",
+            "C": "11"
+          },
+          "output": "3",
+          "explanation": "Path is 2 -> 5 -> 8 -> 11, so the distance is 3."
+        },
+        {
+          "input": {
+            "A": "6 2 1 -1 -1 4 -1 -1 9 7 -1 -1 10 -1 -1",
+            "B": "2",
+            "C": "6"
+          },
+          "output": "1",
+          "explanation": "Path is 2 -> 6, so the distance is 1."
+        }
+      ],
+      "notes": [
+        "Find the LCA by walking down from the root (go left if both keys are smaller, right if both are larger, otherwise stop). The answer is dist(LCA, B) + dist(LCA, C), where each part is found by BST descent.",
+        "Edge case: if B == C, the distance is 0.",
+        "With up to 10^6 nodes a skewed tree is very deep, so use an iterative solution."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,2211 @@
+{
+  "find-leaves-of-binary-tree": [
+    {
+      "input": {
+        "A": "1 2 4 -1 -1 5 -1 -1 3 -1 -1"
+      },
+      "expected": "[[3, 4, 5], [2], [1]]",
+      "is_sample": true,
+      "explanation": "Pass 1 leaves are 4, 5, 3 sorted to [3,4,5]. Pass 2: only 2 is a leaf. Pass 3: only root 1 remains."
+    },
+    {
+      "input": {
+        "A": "1 -1 -1"
+      },
+      "expected": "[[1]]",
+      "is_sample": true,
+      "explanation": "The root itself is the only leaf."
+    },
+    {
+      "input": {
+        "A": "1 2 3 -1 -1 -1 -1"
+      },
+      "expected": "[[3],[2],[1]]",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "1 -1 2 -1 3 -1 -1"
+      },
+      "expected": "[[3],[2],[1]]",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "10 5 -1 -1 20 -1 -1"
+      },
+      "expected": "[[5,20],[10]]",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "4 2 1 -1 -1 3 -1 -1 6 5 -1 -1 7 -1 -1"
+      },
+      "expected": "[[1,3,5,7],[2,6],[4]]",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "2 2 -1 -1 2 -1 -1"
+      },
+      "is_sample": false,
+      "explanation": "Duplicate values (allowed by constraint): root 2 with leaves 2 and 2.",
+      "expected": "[[2,2],[2]]"
+    },
+    {
+      "input": {
+        "A": "1 2 3 -1 -1 -1 4 -1 -1"
+      },
+      "is_sample": false,
+      "explanation": "Asymmetric tree: leaf 3 and leaf 4 peeled first, then node 2, then root 1.",
+      "expected": "[[3,4],[2],[1]]"
+    }
+  ],
+  "tower-of-hanoi": [
+    {
+      "input": {
+        "A": "2"
+      },
+      "expected": "[[1,1,2],[2,1,3],[1,2,3]]",
+      "is_sample": true,
+      "explanation": "Move disk 1 to the middle tower, disk 2 to the last tower, then disk 1 onto the last tower."
+    },
+    {
+      "input": {
+        "A": "3"
+      },
+      "expected": "[[1,1,3],[2,1,2],[1,3,2],[3,1,3],[1,2,1],[2,2,3],[1,1,3]]",
+      "is_sample": true,
+      "explanation": "The unique minimal-move solution."
+    },
+    {
+      "input": {
+        "A": "1"
+      },
+      "expected": "[[1,1,3]]",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "4"
+      },
+      "expected": "[[1,1,2],[2,1,3],[1,2,3],[3,1,2],[1,3,1],[2,3,2],[1,1,2],[4,1,3],[1,2,3],[2,2,1],[1,3,1],[3,2,3],[1,1,2],[2,1,3],[1,2,3]]",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "5"
+      },
+      "is_sample": false,
+      "explanation": "Standard 5-disk test (31 moves).",
+      "expected": "[[1,1,3],[2,1,2],[1,3,2],[3,1,3],[1,2,1],[2,2,3],[1,1,3],[4,1,2],[1,3,2],[2,3,1],[1,2,1],[3,3,2],[1,1,3],[2,1,2],[1,3,2],[5,1,3],[1,2,1],[2,2,3],[1,1,3],[3,2,1],[1,3,2],[2,3,1],[1,2,1],[4,2,3],[1,1,3],[2,1,2],[1,3,2],[3,1,3],[1,2,1],[2,2,3],[1,1,3]]"
+    }
+  ],
+  "check-palindrome-recursion": [
+    {
+      "input": {
+        "A": "naman"
+      },
+      "expected": "1",
+      "is_sample": true,
+      "explanation": "'naman' reads the same both ways."
+    },
+    {
+      "input": {
+        "A": "strings"
+      },
+      "expected": "0",
+      "is_sample": true,
+      "explanation": "'strings' is not a palindrome."
+    },
+    {
+      "input": {
+        "A": "a"
+      },
+      "expected": "1",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "racecar"
+      },
+      "expected": "1",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "abba"
+      },
+      "expected": "1",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "abcdecba"
+      },
+      "expected": "0",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "noon"
+      },
+      "expected": "1",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "aa"
+      },
+      "is_sample": false,
+      "explanation": "Shortest even palindrome.",
+      "expected": "1"
+    },
+    {
+      "input": {
+        "A": "ab"
+      },
+      "is_sample": false,
+      "explanation": "Shortest even non-palindrome.",
+      "expected": "0"
+    },
+    {
+      "input": {
+        "A": "abcdeba"
+      },
+      "is_sample": false,
+      "explanation": "Mismatch in center characters.",
+      "expected": "0"
+    }
+  ],
+  "count-good-subsequences": [
+    {
+      "input": {
+        "A": "[1, 2, 1]"
+      },
+      "expected": "6",
+      "is_sample": true,
+      "explanation": "Frequency 1: three singletons plus pairs {0,1} and {1,2} = 5. Frequency 2: {0,2} = 1. Total 6."
+    },
+    {
+      "input": {
+        "A": "[5, 10, 2]"
+      },
+      "expected": "7",
+      "is_sample": true,
+      "explanation": "All values distinct, so every non-empty subset is good: 2^3 - 1 = 7."
+    },
+    {
+      "input": {
+        "A": "[1, 1, 1]"
+      },
+      "expected": "7",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "[1, 2, 3, 4]"
+      },
+      "expected": "15",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "[4, 4, 2, 2, 1]"
+      },
+      "expected": "20",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "[10, 20, 30, 10, 20, 30]"
+      },
+      "expected": "33",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "[42]"
+      },
+      "is_sample": false,
+      "explanation": "Single element array has exactly 1 non-empty subsequence.",
+      "expected": "1"
+    },
+    {
+      "input": {
+        "A": "[1, 2]"
+      },
+      "is_sample": false,
+      "explanation": "Two distinct elements: [1], [2], [1, 2] (3 valid subsequences).",
+      "expected": "3"
+    }
+  ],
+  "ncr-mod-m": [
+    {
+      "input": {
+        "A": "5",
+        "B": "2",
+        "C": "13"
+      },
+      "expected": "10",
+      "is_sample": true,
+      "explanation": "5C2 = 10, 10 % 13 = 10."
+    },
+    {
+      "input": {
+        "A": "6",
+        "B": "2",
+        "C": "13"
+      },
+      "expected": "2",
+      "is_sample": true,
+      "explanation": "6C2 = 15, 15 % 13 = 2."
+    },
+    {
+      "input": {
+        "A": "10",
+        "B": "5",
+        "C": "7"
+      },
+      "expected": "0",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "20",
+        "B": "10",
+        "C": "1000"
+      },
+      "expected": "756",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "5",
+        "B": "5",
+        "C": "13"
+      },
+      "expected": "1",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "100",
+        "B": "2",
+        "C": "97"
+      },
+      "expected": "3",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "10",
+        "B": "1",
+        "C": "6"
+      },
+      "is_sample": false,
+      "explanation": "B = 1 boundary: 10C1 = 10 % 6 = 4.",
+      "expected": "4"
+    },
+    {
+      "input": {
+        "A": "8",
+        "B": "8",
+        "C": "5"
+      },
+      "is_sample": false,
+      "explanation": "B = A boundary: 8C8 = 1 % 5 = 1.",
+      "expected": "1"
+    },
+    {
+      "input": {
+        "A": "5",
+        "B": "2",
+        "C": "1"
+      },
+      "is_sample": false,
+      "explanation": "C = 1 boundary: any integer mod 1 is 0.",
+      "expected": "0"
+    }
+  ],
+  "grid-unique-paths": [
+    {
+      "input": {
+        "A": "2",
+        "B": "2"
+      },
+      "expected": "2",
+      "is_sample": true,
+      "explanation": "Right-then-down or down-then-right."
+    },
+    {
+      "input": {
+        "A": "3",
+        "B": "3"
+      },
+      "expected": "6",
+      "is_sample": true,
+      "explanation": "C(4,2) = 6 orderings of 2 downs and 2 rights."
+    },
+    {
+      "input": {
+        "A": "1",
+        "B": "1"
+      },
+      "expected": "1",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "1",
+        "B": "10"
+      },
+      "expected": "1",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "7",
+        "B": "3"
+      },
+      "expected": "28",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "10",
+        "B": "10"
+      },
+      "expected": "48620",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "10",
+        "B": "1"
+      },
+      "is_sample": false,
+      "explanation": "Single column: only 1 path going straight down.",
+      "expected": "1"
+    },
+    {
+      "input": {
+        "A": "15",
+        "B": "2"
+      },
+      "is_sample": false,
+      "explanation": "Two columns: C(15, 1) = 15 paths.",
+      "expected": "15"
+    }
+  ],
+  "pascal-triangle": [
+    {
+      "input": {
+        "A": "3"
+      },
+      "expected": "[[1,0,0],[1,1,0],[1,2,1]]",
+      "is_sample": true,
+      "explanation": "Row 2 = 1C0, 1C1, 0. Row 3 = 2C0, 2C1, 2C2."
+    },
+    {
+      "input": {
+        "A": "5"
+      },
+      "expected": "[[1,0,0,0,0],[1,1,0,0,0],[1,2,1,0,0],[1,3,3,1,0],[1,4,6,4,1]]",
+      "is_sample": true,
+      "explanation": "Standard triangle, zero-padded to width A."
+    },
+    {
+      "input": {
+        "A": "1"
+      },
+      "expected": "[[1]]",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "2"
+      },
+      "expected": "[[1,0],[1,1]]",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "4"
+      },
+      "expected": "[[1,0,0,0],[1,1,0,0],[1,2,1,0],[1,3,3,1]]",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "6"
+      },
+      "expected": "[[1,0,0,0,0,0],[1,1,0,0,0,0],[1,2,1,0,0,0],[1,3,3,1,0,0],[1,4,6,4,1,0],[1,5,10,10,5,1]]",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    }
+  ],
+  "consecutive-numbers-sum": [
+    {
+      "input": {
+        "A": "5"
+      },
+      "expected": "2",
+      "is_sample": true,
+      "explanation": "[5] and [2, 3]."
+    },
+    {
+      "input": {
+        "A": "15"
+      },
+      "expected": "4",
+      "is_sample": true,
+      "explanation": "[15], [7,8], [4,5,6], [1,2,3,4,5]."
+    },
+    {
+      "input": {
+        "A": "1"
+      },
+      "expected": "1",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "9"
+      },
+      "expected": "3",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "16"
+      },
+      "expected": "1",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "100"
+      },
+      "expected": "3",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "999"
+      },
+      "expected": "8",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "2"
+      },
+      "is_sample": false,
+      "explanation": "A = 2 is a power of 2: only 1 way (2).",
+      "expected": "1"
+    },
+    {
+      "input": {
+        "A": "3"
+      },
+      "is_sample": false,
+      "explanation": "A = 3: 2 ways (3, 1+2).",
+      "expected": "2"
+    }
+  ],
+  "sorted-permutation-rank": [
+    {
+      "input": {
+        "A": "acb"
+      },
+      "expected": "2",
+      "is_sample": true,
+      "explanation": "Sorted permutations: abc, acb, bac, bca, cab, cba. 'acb' is 2nd."
+    },
+    {
+      "input": {
+        "A": "a"
+      },
+      "expected": "1",
+      "is_sample": true,
+      "explanation": "Only one permutation."
+    },
+    {
+      "input": {
+        "A": "bac"
+      },
+      "expected": "3",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "cba"
+      },
+      "expected": "6",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "dcba"
+      },
+      "expected": "24",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "string"
+      },
+      "expected": "598",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "ba"
+      },
+      "is_sample": false,
+      "explanation": "Two chars reversed: rank 2.",
+      "expected": "2"
+    },
+    {
+      "input": {
+        "A": "abc"
+      },
+      "is_sample": false,
+      "explanation": "Already sorted: rank 1.",
+      "expected": "1"
+    }
+  ],
+  "combinations": [
+    {
+      "input": {
+        "A": "4",
+        "B": "2"
+      },
+      "expected": "[[1,2],[1,3],[1,4],[2,3],[2,4],[3,4]]",
+      "is_sample": true,
+      "explanation": "All size-2 combinations in sorted order."
+    },
+    {
+      "input": {
+        "A": "3",
+        "B": "2"
+      },
+      "expected": "[[1,2],[1,3],[2,3]]",
+      "is_sample": true,
+      "explanation": "All size-2 combinations in sorted order."
+    },
+    {
+      "input": {
+        "A": "1",
+        "B": "1"
+      },
+      "expected": "[[1]]",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "4",
+        "B": "4"
+      },
+      "expected": "[[1,2,3,4]]",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "3",
+        "B": "5"
+      },
+      "expected": "[]",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "5",
+        "B": "3"
+      },
+      "expected": "[[1,2,3],[1,2,4],[1,2,5],[1,3,4],[1,3,5],[1,4,5],[2,3,4],[2,3,5],[2,4,5],[3,4,5]]",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "5",
+        "B": "1"
+      },
+      "is_sample": false,
+      "explanation": "B = 1: each individual number [1] through [5].",
+      "expected": "[[1],[2],[3],[4],[5]]"
+    }
+  ],
+  "excel-column-title": [
+    {
+      "input": {
+        "A": "3"
+      },
+      "expected": "C",
+      "is_sample": true,
+      "explanation": "3 corresponds to C."
+    },
+    {
+      "input": {
+        "A": "27"
+      },
+      "expected": "AA",
+      "is_sample": true,
+      "explanation": "26 -> Z, 27 -> AA."
+    },
+    {
+      "input": {
+        "A": "1"
+      },
+      "expected": "A",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "26"
+      },
+      "expected": "Z",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "28"
+      },
+      "expected": "AB",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "701"
+      },
+      "expected": "ZY",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "702"
+      },
+      "expected": "ZZ",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "703"
+      },
+      "expected": "AAA",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    }
+  ],
+  "very-large-power": [
+    {
+      "input": {
+        "A": "1",
+        "B": "1"
+      },
+      "expected": "1",
+      "is_sample": true,
+      "explanation": "1! = 1, so 1^1 = 1."
+    },
+    {
+      "input": {
+        "A": "2",
+        "B": "2"
+      },
+      "expected": "4",
+      "is_sample": true,
+      "explanation": "2! = 2, so 2^2 = 4."
+    },
+    {
+      "input": {
+        "A": "2",
+        "B": "3"
+      },
+      "expected": "64",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "3",
+        "B": "4"
+      },
+      "expected": "429534507",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "5",
+        "B": "3"
+      },
+      "expected": "15625",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "10",
+        "B": "4"
+      },
+      "expected": "49000000",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "2",
+        "B": "1"
+      },
+      "is_sample": false,
+      "explanation": "B = 1 boundary: 2^(1!) = 2.",
+      "expected": "2"
+    },
+    {
+      "input": {
+        "A": "7",
+        "B": "2"
+      },
+      "is_sample": false,
+      "explanation": "7^(2!) = 49.",
+      "expected": "49"
+    }
+  ],
+  "ncr-mod-p": [
+    {
+      "input": {
+        "A": "5",
+        "B": "2",
+        "C": "13"
+      },
+      "expected": "10",
+      "is_sample": true,
+      "explanation": "5C2 = 10 % 13 = 10."
+    },
+    {
+      "input": {
+        "A": "6",
+        "B": "2",
+        "C": "13"
+      },
+      "expected": "2",
+      "is_sample": true,
+      "explanation": "6C2 = 15 % 13 = 2."
+    },
+    {
+      "input": {
+        "A": "7",
+        "B": "3",
+        "C": "7"
+      },
+      "expected": "0",
+      "is_sample": false,
+      "explanation": "C = A boundary where C is prime (7 <= 7): 7C3 = 35 % 7 = 0."
+    },
+    {
+      "input": {
+        "A": "5",
+        "B": "2",
+        "C": "5"
+      },
+      "expected": "0",
+      "is_sample": false,
+      "explanation": "C = A boundary where C is prime: 5C2 = 10 % 5 = 0."
+    },
+    {
+      "input": {
+        "A": "7",
+        "B": "3",
+        "C": "11"
+      },
+      "expected": "2",
+      "is_sample": false,
+      "explanation": "Prime C > A (11 > 7): 7C3 = 35 % 11 = 2."
+    },
+    {
+      "input": {
+        "A": "10",
+        "B": "4",
+        "C": "1000000007"
+      },
+      "expected": "210",
+      "is_sample": false,
+      "explanation": "Large prime C = 10^9+7: 10C4 = 210 % 1000000007 = 210."
+    },
+    {
+      "input": {
+        "A": "6",
+        "B": "6",
+        "C": "13"
+      },
+      "expected": "1",
+      "is_sample": false,
+      "explanation": "B = A boundary: 6C6 = 1 % 13 = 1."
+    },
+    {
+      "input": {
+        "A": "8",
+        "B": "1",
+        "C": "11"
+      },
+      "expected": "8",
+      "is_sample": false,
+      "explanation": "B = 1 boundary: 8C1 = 8 % 11 = 8."
+    }
+  ],
+  "prime-modulo-inverse": [
+    {
+      "input": {
+        "A": "3",
+        "B": "5"
+      },
+      "expected": "2",
+      "is_sample": true,
+      "explanation": "3 * 2 = 6, 6 % 5 = 1."
+    },
+    {
+      "input": {
+        "A": "6",
+        "B": "23"
+      },
+      "expected": "4",
+      "is_sample": true,
+      "explanation": "6 * 4 = 24, 24 % 23 = 1."
+    },
+    {
+      "input": {
+        "A": "1",
+        "B": "2"
+      },
+      "expected": "1",
+      "is_sample": false,
+      "explanation": "Smallest prime B = 2: 1 * 1 = 1 = 1 mod 2."
+    },
+    {
+      "input": {
+        "A": "5",
+        "B": "7"
+      },
+      "expected": "3",
+      "is_sample": false,
+      "explanation": "5 * 3 = 15 = 1 mod 7."
+    },
+    {
+      "input": {
+        "A": "10",
+        "B": "17"
+      },
+      "expected": "12",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "4",
+        "B": "11"
+      },
+      "expected": "3",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "15",
+        "B": "29"
+      },
+      "expected": "2",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "12",
+        "B": "13"
+      },
+      "is_sample": false,
+      "explanation": "A = B - 1 boundary: (-1)^(-1) = -1 = 12 mod 13.",
+      "expected": "12"
+    },
+    {
+      "input": {
+        "A": "2",
+        "B": "1000000007"
+      },
+      "is_sample": false,
+      "explanation": "Large prime modulus 10^9+7: modular inverse of 2 is 500000004.",
+      "expected": "500000004"
+    }
+  ],
+  "yet-another-matrix-question": [
+    {
+      "input": {
+        "A": "1",
+        "B": "1"
+      },
+      "expected": "0",
+      "is_sample": true,
+      "explanation": "A single cell has sum 1 or -1, never 0."
+    },
+    {
+      "input": {
+        "A": "2",
+        "B": "1"
+      },
+      "expected": "2",
+      "is_sample": true,
+      "explanation": "Flip exactly one of the two cells: 2 ways."
+    },
+    {
+      "input": {
+        "A": "3",
+        "B": "4"
+      },
+      "expected": "0",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "4",
+        "B": "2"
+      },
+      "expected": "36",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "2",
+        "B": "3"
+      },
+      "expected": "8",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "6",
+        "B": "1"
+      },
+      "expected": "20",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "2",
+        "B": "2"
+      },
+      "is_sample": false,
+      "explanation": "A=2, B=2: C(2, 1)^2 = 4.",
+      "expected": "4"
+    },
+    {
+      "input": {
+        "A": "4",
+        "B": "1"
+      },
+      "is_sample": false,
+      "explanation": "A=4, B=1: C(4, 2)^1 = 6.",
+      "expected": "6"
+    }
+  ],
+  "excel-column-number": [
+    {
+      "input": {
+        "A": "AB"
+      },
+      "expected": "28",
+      "is_sample": true,
+      "explanation": "A=1, B=2, ..., AA=27, AB=28."
+    },
+    {
+      "input": {
+        "A": "BB"
+      },
+      "expected": "54",
+      "is_sample": true,
+      "explanation": "BA = 53, BB = 54."
+    },
+    {
+      "input": {
+        "A": "A"
+      },
+      "expected": "1",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "Z"
+      },
+      "expected": "26",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "ZY"
+      },
+      "expected": "701",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "ZZ"
+      },
+      "expected": "702",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "AAA"
+      },
+      "expected": "703",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "B"
+      },
+      "is_sample": false,
+      "explanation": "Single character B = 2.",
+      "expected": "2"
+    },
+    {
+      "input": {
+        "A": "AZ"
+      },
+      "is_sample": false,
+      "explanation": "AZ = 1*26 + 26 = 52.",
+      "expected": "52"
+    }
+  ],
+  "sorted-permutation-rank-with-repeats": [
+    {
+      "input": {
+        "A": "aba"
+      },
+      "expected": "2",
+      "is_sample": true,
+      "explanation": "Unique permutations in order: aab, aba, baa. 'aba' is 2nd."
+    },
+    {
+      "input": {
+        "A": "bca"
+      },
+      "expected": "4",
+      "is_sample": true,
+      "explanation": "abc, acb, bac, bca, cab, cba. 'bca' is 4th."
+    },
+    {
+      "input": {
+        "A": "a"
+      },
+      "expected": "1",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "bbb"
+      },
+      "expected": "1",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "settle"
+      },
+      "expected": "102",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "book"
+      },
+      "expected": "3",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "aa"
+      },
+      "is_sample": false,
+      "explanation": "Two identical chars: only 1 unique permutation.",
+      "expected": "1"
+    },
+    {
+      "input": {
+        "A": "ba"
+      },
+      "is_sample": false,
+      "explanation": "Two distinct chars: rank 2.",
+      "expected": "2"
+    },
+    {
+      "input": {
+        "A": "aaaa"
+      },
+      "is_sample": false,
+      "explanation": "All identical chars: rank 1.",
+      "expected": "1"
+    }
+  ],
+  "ath-magical-number": [
+    {
+      "input": {
+        "A": "1",
+        "B": "2",
+        "C": "3"
+      },
+      "expected": "2",
+      "is_sample": true,
+      "explanation": "The 1st magical number is 2."
+    },
+    {
+      "input": {
+        "A": "4",
+        "B": "2",
+        "C": "3"
+      },
+      "expected": "6",
+      "is_sample": true,
+      "explanation": "First four are 2, 3, 4, 6."
+    },
+    {
+      "input": {
+        "A": "5",
+        "B": "2",
+        "C": "4"
+      },
+      "expected": "10",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "8",
+        "B": "4",
+        "C": "6"
+      },
+      "expected": "24",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "10",
+        "B": "3",
+        "C": "5"
+      },
+      "expected": "21",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "100",
+        "B": "2",
+        "C": "3"
+      },
+      "expected": "150",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "5",
+        "B": "3",
+        "C": "3"
+      },
+      "is_sample": false,
+      "explanation": "B == C boundary: multiples of 3 (15).",
+      "expected": "15"
+    },
+    {
+      "input": {
+        "A": "1",
+        "B": "5",
+        "C": "5"
+      },
+      "is_sample": false,
+      "explanation": "A = 1, B == C: first magical number is 5.",
+      "expected": "5"
+    }
+  ],
+  "sorted-array-to-balanced-bst": [
+    {
+      "input": {
+        "A": "[1, 2, 3]"
+      },
+      "expected": "2 1 -1 -1 3 -1 -1",
+      "is_sample": true,
+      "explanation": "Root 2 with children 1 and 3."
+    },
+    {
+      "input": {
+        "A": "[1, 2, 3, 5, 10]"
+      },
+      "expected": "3 2 1 -1 -1 -1 5 -1 10 -1 -1",
+      "is_sample": true,
+      "explanation": "One valid balanced BST."
+    },
+    {
+      "input": {
+        "A": "[1]"
+      },
+      "expected": "1 -1 -1",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "[1, 2]"
+      },
+      "expected": "1 -1 2 -1 -1",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "[-10, -3, 0, 5, 9]"
+      },
+      "expected": "0 -10 -1 -3 -1 -1 5 -1 9 -1 -1",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "[2, 4, 6, 8, 10, 12]"
+      },
+      "expected": "6 2 -1 4 -1 -1 10 8 -1 -1 12 -1 -1",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    }
+  ],
+  "check-for-bst-with-one-child": [
+    {
+      "input": {
+        "A": "[4, 10, 5, 8]"
+      },
+      "expected": "YES",
+      "is_sample": true,
+      "explanation": "BST: 4 -> right 10 -> left 5 -> right 8, each internal node has one child."
+    },
+    {
+      "input": {
+        "A": "[1, 5, 6, 4]"
+      },
+      "expected": "NO",
+      "is_sample": true,
+      "explanation": "No such BST exists."
+    },
+    {
+      "input": {
+        "A": "[10]"
+      },
+      "expected": "YES",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "[10, 5, 2, 1]"
+      },
+      "expected": "YES",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "[20, 10, 11, 13, 12]"
+      },
+      "expected": "YES",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "[20, 10, 11, 13, 9]"
+      },
+      "expected": "NO",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "[10, 5]"
+      },
+      "is_sample": false,
+      "explanation": "Two nodes decreasing: YES.",
+      "expected": "YES"
+    },
+    {
+      "input": {
+        "A": "[1, 2, 3, 4]"
+      },
+      "is_sample": false,
+      "explanation": "Monotonically increasing preorder: YES.",
+      "expected": "YES"
+    }
+  ],
+  "search-in-bst": [
+    {
+      "input": {
+        "A": "15 12 10 8 -1 -1 -1 14 -1 -1 20 16 -1 -1 27 -1 -1",
+        "B": "16"
+      },
+      "expected": "1",
+      "is_sample": true,
+      "explanation": "Node 16 is present."
+    },
+    {
+      "input": {
+        "A": "8 6 1 -1 -1 7 -1 -1 21 -1 -1",
+        "B": "9"
+      },
+      "expected": "0",
+      "is_sample": true,
+      "explanation": "No node with value 9."
+    },
+    {
+      "input": {
+        "A": "5 -1 -1",
+        "B": "5"
+      },
+      "expected": "1",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "5 -1 -1",
+        "B": "10"
+      },
+      "expected": "0",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "10 5 2 -1 -1 7 -1 -1 15 -1 20 -1 -1",
+        "B": "7"
+      },
+      "expected": "1",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "10 5 2 -1 -1 7 -1 -1 15 -1 20 -1 -1",
+        "B": "99"
+      },
+      "expected": "0",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "10 5 2 -1 -1 7 -1 -1 15 -1 20 -1 -1",
+        "B": "10"
+      },
+      "is_sample": false,
+      "explanation": "Target is the root node.",
+      "expected": "1"
+    },
+    {
+      "input": {
+        "A": "10 5 -1 -1 15 -1 -1",
+        "B": "1"
+      },
+      "is_sample": false,
+      "explanation": "Target is smaller than minimum value in tree.",
+      "expected": "0"
+    },
+    {
+      "input": {
+        "A": "10 5 -1 -1 15 -1 -1",
+        "B": "50"
+      },
+      "is_sample": false,
+      "explanation": "Target is greater than maximum value in tree.",
+      "expected": "0"
+    }
+  ],
+  "valid-binary-search-tree": [
+    {
+      "input": {
+        "A": "1 2 -1 -1 3 -1 -1"
+      },
+      "expected": "0",
+      "is_sample": true,
+      "explanation": "2 is in the left subtree of 1 but is not less than 1."
+    },
+    {
+      "input": {
+        "A": "2 1 -1 -1 3 -1 -1"
+      },
+      "expected": "1",
+      "is_sample": true,
+      "explanation": "Satisfies all conditions."
+    },
+    {
+      "input": {
+        "A": "1 -1 -1"
+      },
+      "expected": "1",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "10 5 -1 -1 15 6 -1 -1 20 -1 -1"
+      },
+      "expected": "0",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "2 2 -1 -1 -1"
+      },
+      "expected": "0",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "20 10 5 -1 -1 15 -1 -1 30 25 -1 -1 35 -1 -1"
+      },
+      "expected": "1",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "2 -1 2 -1 -1"
+      },
+      "is_sample": false,
+      "explanation": "Duplicate value on right child violates strict BST inequality.",
+      "expected": "0"
+    },
+    {
+      "input": {
+        "A": "5 4 3 2 1 -1 -1 -1 -1 -1 -1"
+      },
+      "is_sample": false,
+      "explanation": "Left-skewed valid BST.",
+      "expected": "1"
+    }
+  ],
+  "largest-bst-subtree": [
+    {
+      "input": {
+        "A": "10 5 1 -1 -1 8 -1 -1 15 -1 7 -1 -1"
+      },
+      "expected": "3",
+      "is_sample": true,
+      "explanation": "The subtree rooted at 5 (nodes 5, 1, 8) is the largest BST."
+    },
+    {
+      "input": {
+        "A": "5 3 1 -1 -1 4 -1 -1 8 7 -1 -1 9 -1 -1"
+      },
+      "expected": "7",
+      "is_sample": true,
+      "explanation": "The whole tree is a BST."
+    },
+    {
+      "input": {
+        "A": "1 -1 -1"
+      },
+      "expected": "1",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "10 15 -1 -1 5 -1 -1"
+      },
+      "expected": "1",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "50 30 20 -1 -1 40 -1 -1 60 70 -1 -1 80 -1 -1"
+      },
+      "expected": "3",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "1 2 4 -1 -1 5 -1 -1 3 -1 -1"
+      },
+      "expected": "1",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "10 5 -1 -1 -1"
+      },
+      "is_sample": false,
+      "explanation": "Two nodes valid BST: size 2.",
+      "expected": "2"
+    },
+    {
+      "input": {
+        "A": "10 15 -1 -1 -1"
+      },
+      "is_sample": false,
+      "explanation": "Two nodes invalid BST (left child 15 > root 10): largest BST is leaf 15 of size 1.",
+      "expected": "1"
+    }
+  ],
+  "delete-a-node-in-bst": [
+    {
+      "input": {
+        "A": "15 12 10 8 -1 -1 -1 14 -1 -1 20 16 -1 -1 27 -1 -1",
+        "B": "10"
+      },
+      "expected": "15 12 8 -1 -1 14 -1 -1 20 16 -1 -1 27 -1 -1",
+      "is_sample": true,
+      "explanation": "Node 10 has only a left child 8, which takes its place."
+    },
+    {
+      "input": {
+        "A": "8 6 1 -1 -1 7 -1 -1 21 -1 -1",
+        "B": "6"
+      },
+      "expected": "8 1 -1 7 -1 -1 21 -1 -1",
+      "is_sample": true,
+      "explanation": "Node 6 has two children and is replaced by its in-order predecessor 1; 7 becomes the right child of 1."
+    },
+    {
+      "input": {
+        "A": "10 5 -1 -1 -1",
+        "B": "10"
+      },
+      "expected": "5 -1 -1",
+      "is_sample": false,
+      "explanation": "Delete root of 2-node tree having only left child: result is 5."
+    },
+    {
+      "input": {
+        "A": "10 5 -1 -1 -1",
+        "B": "99"
+      },
+      "expected": "10 5 -1 -1 -1",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "20 10 5 -1 -1 15 -1 -1 30 25 -1 -1 35 -1 -1",
+        "B": "20"
+      },
+      "expected": "15 10 5 -1 -1 -1 30 25 -1 -1 35 -1 -1",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "20 10 -1 -1 30 -1 -1",
+        "B": "30"
+      },
+      "expected": "20 10 -1 -1 -1",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "10 -1 20 -1 -1",
+        "B": "10"
+      },
+      "is_sample": false,
+      "explanation": "Delete root that has only right child.",
+      "expected": "20 -1 -1"
+    }
+  ],
+  "kth-smallest-element-in-bst": [
+    {
+      "input": {
+        "A": "2 1 -1 -1 3 -1 -1",
+        "B": "2"
+      },
+      "expected": "2",
+      "is_sample": true,
+      "explanation": "Inorder is 1, 2, 3, so the 2nd is 2."
+    },
+    {
+      "input": {
+        "A": "3 2 1 -1 -1 -1 -1",
+        "B": "1"
+      },
+      "expected": "1",
+      "is_sample": true,
+      "explanation": "Left-skewed tree 3 -> 2 -> 1, smallest is 1."
+    },
+    {
+      "input": {
+        "A": "5 3 2 -1 -1 4 -1 -1 6 -1 -1",
+        "B": "1"
+      },
+      "expected": "2",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "5 3 2 -1 -1 4 -1 -1 6 -1 -1",
+        "B": "3"
+      },
+      "expected": "4",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "5 3 2 -1 -1 4 -1 -1 6 -1 -1",
+        "B": "5"
+      },
+      "expected": "6",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "42 -1 -1",
+        "B": "1"
+      },
+      "is_sample": false,
+      "explanation": "Single node tree B = 1.",
+      "expected": "42"
+    },
+    {
+      "input": {
+        "A": "10 5 -1 -1 15 -1 -1",
+        "B": "3"
+      },
+      "is_sample": false,
+      "explanation": "Finding maximum element (B = N = 3).",
+      "expected": "15"
+    }
+  ],
+  "path-to-given-node": [
+    {
+      "input": {
+        "A": "1 2 4 -1 -1 5 -1 -1 3 6 -1 -1 7 -1 -1",
+        "B": "5"
+      },
+      "expected": "[1, 2, 5]",
+      "is_sample": true,
+      "explanation": "Root 1, left to 2, right to 5."
+    },
+    {
+      "input": {
+        "A": "1 2 4 -1 -1 5 -1 -1 3 -1 6 -1 -1",
+        "B": "1"
+      },
+      "expected": "[1]",
+      "is_sample": true,
+      "explanation": "The target is the root itself."
+    },
+    {
+      "input": {
+        "A": "1 2 -1 -1 3 -1 -1",
+        "B": "3"
+      },
+      "expected": "[1,3]",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "10 5 3 -1 -1 7 -1 -1 15 12 -1 -1 18 -1 -1",
+        "B": "12"
+      },
+      "expected": "[10,15,12]",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "10 5 3 -1 -1 7 -1 -1 15 12 -1 -1 18 -1 -1",
+        "B": "10"
+      },
+      "expected": "[10]",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "1 2 3 -1 -1 -1 -1",
+        "B": "3"
+      },
+      "is_sample": false,
+      "explanation": "Deepest left leaf in left-skewed tree.",
+      "expected": "[1,2,3]"
+    },
+    {
+      "input": {
+        "A": "1 -1 2 -1 3 -1 -1",
+        "B": "3"
+      },
+      "is_sample": false,
+      "explanation": "Deepest right leaf in right-skewed tree.",
+      "expected": "[1,2,3]"
+    }
+  ],
+  "morris-inorder-traversal": [
+    {
+      "input": {
+        "A": "1 -1 2 3 -1 -1 -1"
+      },
+      "expected": "[1, 3, 2]",
+      "is_sample": true,
+      "explanation": "Tree 1 -> right 2 -> left 3."
+    },
+    {
+      "input": {
+        "A": "1 6 -1 -1 2 3 -1 -1 -1"
+      },
+      "expected": "[6, 1, 3, 2]",
+      "is_sample": true,
+      "explanation": "Root 1 has left 6 and right 2, where 2 has left child 3."
+    },
+    {
+      "input": {
+        "A": "1 -1 -1"
+      },
+      "expected": "[1]",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "4 2 1 -1 -1 3 -1 -1 6 5 -1 -1 7 -1 -1"
+      },
+      "expected": "[1,2,3,4,5,6,7]",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "1 2 3 -1 -1 -1 -1"
+      },
+      "expected": "[3,2,1]",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "1 -1 2 -1 3 -1 -1"
+      },
+      "expected": "[1,2,3]",
+      "is_sample": false,
+      "explanation": "Edge case / system verification test"
+    },
+    {
+      "input": {
+        "A": "2 1 -1 -1 -1"
+      },
+      "is_sample": false,
+      "explanation": "Two nodes (root and left child).",
+      "expected": "[1,2]"
+    },
+    {
+      "input": {
+        "A": "1 -1 2 -1 -1"
+      },
+      "is_sample": false,
+      "explanation": "Two nodes (root and right child).",
+      "expected": "[1,2]"
+    }
+  ],
+  "two-sum-bst": [
+    {
+      "input": {
+        "A": "10 9 -1 -1 20 -1 -1",
+        "B": "19"
+      },
+      "is_sample": true,
+      "explanation": "10 + 9 = 19.",
+      "expected": "1"
+    },
+    {
+      "input": {
+        "A": "10 9 -1 -1 20 -1 -1",
+        "B": "40"
+      },
+      "is_sample": true,
+      "explanation": "No such pair exists. Note that 20 + 20 does not count because the two nodes must be different.",
+      "expected": "0"
+    },
+    {
+      "input": {
+        "A": "15 -1 -1",
+        "B": "30"
+      },
+      "is_sample": false,
+      "explanation": "Single node cannot pair with itself.",
+      "expected": "0"
+    },
+    {
+      "input": {
+        "A": "5 2 -1 -1 -1",
+        "B": "7"
+      },
+      "is_sample": false,
+      "explanation": "2 + 5 = 7.",
+      "expected": "1"
+    },
+    {
+      "input": {
+        "A": "15 10 5 -1 -1 12 -1 -1 20 18 -1 -1 25 -1 -1",
+        "B": "22"
+      },
+      "is_sample": false,
+      "explanation": "10 + 12 = 22.",
+      "expected": "1"
+    },
+    {
+      "input": {
+        "A": "15 10 5 -1 -1 12 -1 -1 20 18 -1 -1 25 -1 -1",
+        "B": "50"
+      },
+      "is_sample": false,
+      "explanation": "Sum 50 exceeds max pair sum (20 + 25 = 45).",
+      "expected": "0"
+    },
+    {
+      "input": {
+        "A": "15 10 5 -1 -1 12 -1 -1 20 18 -1 -1 25 -1 -1",
+        "B": "30"
+      },
+      "is_sample": false,
+      "explanation": "5 + 25 = 30.",
+      "expected": "1"
+    },
+    {
+      "input": {
+        "A": "2 1 -1 -1 3 -1 -1",
+        "B": "4"
+      },
+      "is_sample": false,
+      "explanation": "Smallest valid positive integers: 1 + 3 = 4.",
+      "expected": "1"
+    },
+    {
+      "input": {
+        "A": "10 5 -1 -1 15 -1 -1",
+        "B": "10"
+      },
+      "is_sample": false,
+      "explanation": "Target smaller than minimum pair: min pair is 5+10=15 > 10.",
+      "expected": "0"
+    }
+  ],
+  "common-nodes-in-two-bst": [
+    {
+      "input": {
+        "A": "5 2 -1 3 -1 -1 8 -1 15 9 -1 -1 -1",
+        "B": "7 1 -1 2 -1 -1 10 -1 15 11 -1 -1 -1"
+      },
+      "is_sample": true,
+      "explanation": "Common values are 2 and 15, so 2 + 15 = 17.",
+      "expected": "17"
+    },
+    {
+      "input": {
+        "A": "7 1 -1 2 -1 -1 10 -1 15 11 -1 -1 -1",
+        "B": "7 1 -1 2 -1 -1 10 -1 15 11 -1 -1 -1"
+      },
+      "is_sample": true,
+      "explanation": "Both trees are identical: 7 + 2 + 1 + 10 + 15 + 11 = 46.",
+      "expected": "46"
+    },
+    {
+      "input": {
+        "A": "10 5 -1 -1 15 -1 -1",
+        "B": "20 18 -1 -1 25 -1 -1"
+      },
+      "is_sample": false,
+      "explanation": "Disjoint trees with no common nodes.",
+      "expected": "0"
+    },
+    {
+      "input": {
+        "A": "10 5 -1 -1 -1",
+        "B": "10 -1 20 -1 -1"
+      },
+      "is_sample": false,
+      "explanation": "Single common node with value 10.",
+      "expected": "10"
+    },
+    {
+      "input": {
+        "A": "50 30 20 -1 -1 40 -1 -1 70 60 -1 -1 80 -1 -1",
+        "B": "60 40 30 -1 -1 -1 90 70 -1 -1 100 -1 -1"
+      },
+      "is_sample": false,
+      "explanation": "Common nodes are 30, 40, 60, 70 (sum = 200).",
+      "expected": "200"
+    },
+    {
+      "input": {
+        "A": "1000000 -1 -1",
+        "B": "1000000 -1 -1"
+      },
+      "is_sample": false,
+      "explanation": "Large node value verification.",
+      "expected": "1000000"
+    },
+    {
+      "input": {
+        "A": "5 -1 -1",
+        "B": "5 -1 -1"
+      },
+      "is_sample": false,
+      "explanation": "Single-node identical trees: common sum = 5.",
+      "expected": "5"
+    },
+    {
+      "input": {
+        "A": "5 -1 -1",
+        "B": "6 -1 -1"
+      },
+      "is_sample": false,
+      "explanation": "Single-node disjoint trees: common sum = 0.",
+      "expected": "0"
+    }
+  ],
+  "bst-nodes-in-a-range": [
+    {
+      "input": {
+        "A": "15 12 10 8 -1 -1 -1 14 -1 -1 20 16 -1 -1 27 -1 -1",
+        "B": "12",
+        "C": "20"
+      },
+      "is_sample": true,
+      "explanation": "Nodes in [12, 20] are 12, 14, 15, 20 and 16.",
+      "expected": "5"
+    },
+    {
+      "input": {
+        "A": "8 6 1 -1 -1 7 -1 -1 21 -1 -1",
+        "B": "2",
+        "C": "20"
+      },
+      "is_sample": true,
+      "explanation": "Nodes in [2, 20] are 8, 6 and 7.",
+      "expected": "3"
+    },
+    {
+      "input": {
+        "A": "10 5 -1 -1 15 -1 -1",
+        "B": "1",
+        "C": "100"
+      },
+      "is_sample": false,
+      "explanation": "All nodes fall within range.",
+      "expected": "3"
+    },
+    {
+      "input": {
+        "A": "10 5 -1 -1 15 -1 -1",
+        "B": "20",
+        "C": "50"
+      },
+      "is_sample": false,
+      "explanation": "No nodes within range.",
+      "expected": "0"
+    },
+    {
+      "input": {
+        "A": "10 5 2 -1 -1 7 -1 -1 15 -1 20 -1 -1",
+        "B": "7",
+        "C": "7"
+      },
+      "is_sample": false,
+      "explanation": "Exact match for single node 7.",
+      "expected": "1"
+    },
+    {
+      "input": {
+        "A": "42 -1 -1",
+        "B": "40",
+        "C": "50"
+      },
+      "is_sample": false,
+      "explanation": "Single root node in range.",
+      "expected": "1"
+    },
+    {
+      "input": {
+        "A": "10 5 -1 -1 15 -1 -1",
+        "B": "8",
+        "C": "8"
+      },
+      "is_sample": false,
+      "explanation": "B = C single value not present in tree.",
+      "expected": "0"
+    },
+    {
+      "input": {
+        "A": "20 10 -1 -1 30 -1 -1",
+        "B": "10",
+        "C": "30"
+      },
+      "is_sample": false,
+      "explanation": "Range precisely matches [min, max] of tree: all 3 nodes.",
+      "expected": "3"
+    }
+  ],
+  "distance-between-nodes-of-bst": [
+    {
+      "input": {
+        "A": "5 2 1 -1 -1 4 -1 -1 8 6 -1 -1 11 -1 -1",
+        "B": "2",
+        "C": "11"
+      },
+      "is_sample": true,
+      "explanation": "Path is 2 -> 5 -> 8 -> 11, so distance is 3.",
+      "expected": "3"
+    },
+    {
+      "input": {
+        "A": "6 2 1 -1 -1 4 -1 -1 9 7 -1 -1 10 -1 -1",
+        "B": "2",
+        "C": "6"
+      },
+      "is_sample": true,
+      "explanation": "Path is 2 -> 6, distance is 1.",
+      "expected": "1"
+    },
+    {
+      "input": {
+        "A": "10 5 -1 -1 15 -1 -1",
+        "B": "15",
+        "C": "15"
+      },
+      "is_sample": false,
+      "explanation": "Distance from a node to itself is 0.",
+      "expected": "0"
+    },
+    {
+      "input": {
+        "A": "10 5 2 -1 -1 7 -1 -1 15 -1 20 -1 -1",
+        "B": "10",
+        "C": "2"
+      },
+      "is_sample": false,
+      "explanation": "Root to leaf: 10 -> 5 -> 2 (2 edges).",
+      "expected": "2"
+    },
+    {
+      "input": {
+        "A": "10 5 2 -1 -1 7 -1 -1 15 -1 20 -1 -1",
+        "B": "2",
+        "C": "7"
+      },
+      "is_sample": false,
+      "explanation": "Nodes in same subtree: 2 -> 5 -> 7 (2 edges).",
+      "expected": "2"
+    },
+    {
+      "input": {
+        "A": "5 2 1 -1 -1 4 -1 -1 8 6 -1 -1 11 -1 -1",
+        "B": "11",
+        "C": "2"
+      },
+      "is_sample": false,
+      "explanation": "Reversed arguments B > C.",
+      "expected": "3"
+    },
+    {
+      "input": {
+        "A": "10 5 -1 -1 15 -1 -1",
+        "B": "10",
+        "C": "15"
+      },
+      "is_sample": false,
+      "explanation": "Direct parent-child edge (1 edge).",
+      "expected": "1"
+    },
+    {
+      "input": {
+        "A": "42 -1 -1",
+        "B": "42",
+        "C": "42"
+      },
+      "is_sample": false,
+      "explanation": "Single node tree B = C = root: distance is 0.",
+      "expected": "0"
+    },
+    {
+      "input": {
+        "A": "10 5 -1 -1 -1",
+        "B": "10",
+        "C": "5"
+      },
+      "is_sample": false,
+      "explanation": "Two nodes parent and left child: distance is 1.",
+      "expected": "1"
+    }
+  ]
+}
