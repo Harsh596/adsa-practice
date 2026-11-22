@@ -11,7 +11,12 @@ from socketserver import ThreadingMixIn
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BACKEND_DIR = os.path.join(BASE_DIR, 'backend')
 FRONTEND_DIR = os.path.join(BASE_DIR, 'frontend')
-DATA_DIR = os.path.join(BASE_DIR, 'data')
+
+# Support serverless read-only environments (e.g. Vercel / AWS Lambda)
+if os.environ.get('VERCEL') or not os.access(BASE_DIR, os.W_OK):
+    DATA_DIR = '/tmp/data'
+else:
+    DATA_DIR = os.path.join(BASE_DIR, 'data')
 os.makedirs(DATA_DIR, exist_ok=True)
 
 sys.path.append(BACKEND_DIR)
@@ -118,7 +123,8 @@ class LeetCodeHandler(SimpleHTTPRequestHandler):
             return {}
 
     def do_GET(self):
-        parsed = urllib.parse.urlparse(self.path)
+        raw_path = self.headers.get('x-forwarded-uri') or self.headers.get('x-matched-path') or self.path
+        parsed = urllib.parse.urlparse(raw_path)
         path = parsed.path
         query = urllib.parse.parse_qs(parsed.query)
 
@@ -221,7 +227,8 @@ class LeetCodeHandler(SimpleHTTPRequestHandler):
             return super().do_GET()
 
     def do_POST(self):
-        parsed = urllib.parse.urlparse(self.path)
+        raw_path = self.headers.get('x-forwarded-uri') or self.headers.get('x-matched-path') or self.path
+        parsed = urllib.parse.urlparse(raw_path)
         path = parsed.path
 
         problems_data, problems_dict = get_problems_data()

@@ -1,0 +1,1 @@
+# Built-in Python standard library modules are used (no external dependencies required)

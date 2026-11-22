@@ -695,6 +695,16 @@ def run_judge(problem, user_code, testcases, language="cpp", timeout_sec=2.0):
         }
 
 def judge_cpp(problem, user_code, testcases, timeout_sec=2.0):
+    if not shutil.which("g++"):
+        return {
+            "verdict": "Compile Error",
+            "compile_error": "g++ compiler not found in the current environment.\n(Note: Python 3 solutions run natively in Vercel Serverless mode. For native C++ compilation, run locally or connect an external container judge via ?api=...)",
+            "passed_count": 0,
+            "total_count": len(testcases),
+            "total_time_ms": 0,
+            "testcases": []
+        }
+
     tmpdir = tempfile.mkdtemp(prefix="gcc_judge_")
     src_file = os.path.join(tmpdir, "solution.cpp")
     exe_file = os.path.join(tmpdir, "solution")
@@ -723,6 +733,16 @@ def judge_cpp(problem, user_code, testcases, timeout_sec=2.0):
         shutil.rmtree(tmpdir, ignore_errors=True)
 
 def judge_java(problem, user_code, testcases, timeout_sec=2.0):
+    if not shutil.which("javac") or not shutil.which("java"):
+        return {
+            "verdict": "Compile Error",
+            "compile_error": "javac/java JDK not found in the current environment.\n(Note: Python 3 solutions run natively in Vercel Serverless mode. For native Java compilation, run locally or connect an external container judge via ?api=...)",
+            "passed_count": 0,
+            "total_count": len(testcases),
+            "total_time_ms": 0,
+            "testcases": []
+        }
+
     tmpdir = tempfile.mkdtemp(prefix="java_judge_")
     src_file = os.path.join(tmpdir, "Main.java")
 
